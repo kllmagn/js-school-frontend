@@ -1,0 +1,31 @@
+@font-face { font-family: knewave-regular; 
+    src: url('../../Knewave-Regular.ttf'); } 
+  
+
+
+
+.container {
+    position: relative;
+    width: 100%;
+    background-color: #DFDCF1;
+    padding-bottom: 3%;
+}
+
+.text a{
+
+    display: flex;
+    flex-flow: column;
+    color: black;
+    margin-left: 44px;
+    padding-bottom: 14px;
+}
+
+
+.knewave-regular {
+    font-family: "knewave-regular", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    
+  }
+

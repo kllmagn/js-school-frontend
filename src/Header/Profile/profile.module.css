@@ -1,0 +1,52 @@
+.user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0px 20px;
+    height: 100%;
+    user-select: none;
+}
+
+.avatar {
+    border-radius: 50%;
+    background-color: #FFFDFD;
+    width: 45px;
+    height: 45px;
+}
+
+.user:hover .userClicked {
+    background: #fffdfd48;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+}
+
+.user:hover .arrowClicked {
+    rotate: 180deg;
+    transition-property: rotate;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+}
+
+.logButton { 
+    position: relative;
+    display: flex;
+    
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    background-color: transparent;
+    border: none; 
+    outline: none; 
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.user:hover .hidden {
+    opacity: 1;
+}
+

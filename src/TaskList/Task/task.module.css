@@ -1,0 +1,52 @@
+.taskContainer {
+    position: relative;
+    display: flex;
+    height: calc(100vh - 45px);
+    min-height: 680px;
+    max-height: 1000px;
+}
+
+.taskContainerInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1365px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+
+.taskLayout {
+    position: relative;
+    display: flex;
+   
+    height: 100%;
+    font-size: 14px;
+}
+
+
+
+.displayContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    position: relative;
+    width: 50%;
+    min-width: 361px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+}
+
+.leftPart {
+    height: 100%;
+    width: 50%;
+}
+
+.rightPart {
+   width: 49.9%;
+}
+
+

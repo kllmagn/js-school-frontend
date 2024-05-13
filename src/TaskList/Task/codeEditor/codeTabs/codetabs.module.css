@@ -1,0 +1,34 @@
+
+.codeTabs {
+    padding-right: 15px;
+    padding-left: 51px;
+    
+}
+
+
+
+.codeTab {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 42px;
+    padding: 12px 15px;
+    font-size: 14px;
+    line-height: 1.2;
+    border-left-width: 1px;
+    border-left-style: solid;
+    cursor: default;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.codeTabName {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+}

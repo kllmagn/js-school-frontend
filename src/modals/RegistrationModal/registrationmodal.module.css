@@ -1,0 +1,122 @@
+.background {
+  position:  absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 48%;
+  z-index: 1;
+}
+
+.closeSvg {
+  align-self: self-end;
+}
+
+.registrationModal {
+  border-radius: 1%;
+  display: flex;
+  position:  absolute;
+  align-items: center;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
+  background-color: #FFFFFF;
+  opacity: 100%;
+  z-index: 2;
+}
+.textRegistration {
+  padding-top: 20px;
+  color: #000000;
+  font-size: 32px;
+
+}
+.registrationModal a {
+  color: #000000;
+}
+
+.lineContainer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: auto;
+  gap: 10%;
+  margin-top: 20px;
+}
+
+.lineContainer a {
+  text-align: center;
+}
+.logo {
+  display: flex;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.line {
+  width: 40%;
+}
+
+.containerForm {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+.containerForm a {
+  align-self: center;
+  padding-left: 5%;
+  font-size: 13px;
+}
+
+.formsModal textarea {
+  width: 70%;
+  align-self: center;
+  color: rgb(0 0 0 / 20%);;
+}
+ 
+.formsModal {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.buttonRegist {
+  align-self: center;
+  width: 70%;
+  height: 30%;
+  background-color: #8C6FFF ;
+  opacity: 69%;
+  border: 0;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.buttonEnter {
+  margin-top: 20px;
+  align-self: center;
+  border: 1px solid #000000;
+  height: 10%;
+  width: 70%;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  color: #AF9BFF;
+}
+
+.warning {
+  color: red !important;
+  padding: 0 !important;
+}
+
+.warningContainer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,55 @@
+.aceGutter {
+    contain: strict;
+    will-change: transform;
+
+    position: absolute;
+    overflow: hidden;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 52px;
+    cursor: default;
+    z-index: 4;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    background: #D9D9D9;
+    color: #000000;
+    border-right: 1px solid #d5d5d5;
+}
+
+.aceLayer {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    word-wrap: normal;
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.aceGutterLayer {
+    position: relative;
+    width: auto;
+    text-align: right;
+    pointer-events: auto;
+    height: 1000000px;
+   
+}
+
+.aceGutterCell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: 19px;
+    padding-right: 6px;
+    background-repeat: no-repeat;
+
+    
+}

@@ -1,0 +1,79 @@
+.codeConntainer {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+
+    position: relative;
+    width: 50%;
+    min-width: 361px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    background-color: #F5F5F5;
+
+}
+
+
+.codeEditor {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.codeEditorLayout {
+    position: relative;
+    display: flex;
+
+    flex-grow: 1;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.codeEditorLabel{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    order: 1;
+    width: 34px;
+    padding-top: 5px;
+}
+
+.codeEditorLabelItem{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    margin: 3px 5px;
+    padding: 7px 0;
+    font-size: 14px;
+    color: inherit;
+    background: 0 0;
+    border: 0;
+    transform: rotate(180deg);
+    writing-mode: tb-rl;
+    
+}
+
+.codeEditorItem {
+    flex-grow: 1;
+    order: 0;
+    background-color: white;
+    color: black;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    font: 12px / normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    direction: ltr;
+    text-align: left;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.textInput {
+    opacity: 0;
+    font-size: 1px;
+    height: 1px;
+    width: 1px;
+    transform: translate(56px, 220px);
+}
+
