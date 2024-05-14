@@ -1,20 +1,29 @@
-import { Reducer, UnknownAction, applyMiddleware, combineReducers, createStore } from "redux";
+import {
+	Reducer,
+	UnknownAction,
+	applyMiddleware,
+	combineReducers,
+	createStore,
+} from "redux";
 import { AuthenticationState } from "./token/token.slice";
 import token from "./token/token.slice";
 
 export type AppState = {
-    token: AuthenticationState,
+	token: AuthenticationState;
 };
 
 export type AppReducer = {
-    token: Reducer<AuthenticationState>,
+	token: Reducer<AuthenticationState>;
 };
 
-export const rootReducer = combineReducers<AppReducer>({token});
+export const rootReducer = combineReducers<AppReducer>({ token });
 
-const item = localStorage.getItem('reduxState');
+const item = localStorage.getItem("reduxState");
 const persistedState = item ? JSON.parse(item) : {};
-export const store = createStore<AppState, UnknownAction>(rootReducer, persistedState);
-store.subscribe(()=>{
-    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+export const store = createStore<AppState, UnknownAction>(
+	rootReducer,
+	persistedState,
+);
+store.subscribe(() => {
+	localStorage.setItem("reduxState", JSON.stringify(store.getState()));
 });

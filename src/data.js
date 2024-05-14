@@ -1,7 +1,7 @@
 export const data = [
-    {
-        'id': 1,
-        'login': 'meridix',
-        'password': '1234',
-    }
+	{
+		id: 1,
+		login: "meridix",
+		password: "1234",
+	},
 ];
