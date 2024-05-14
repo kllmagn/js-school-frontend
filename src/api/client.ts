@@ -1,7 +1,7 @@
 class ApiClient {
 	constructor(
 		public token: string,
-		public apiEndpoint = "localhost:8080",
+		public apiEndpoint = "http://localhost:8000/api/v1",
 	) {
 		this.apiEndpoint = apiEndpoint;
 		this.token = token;

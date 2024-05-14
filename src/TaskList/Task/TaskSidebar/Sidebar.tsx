@@ -6,7 +6,7 @@ import { TheorySidebar } from "../../../modals/TheorySidebar/TheorySidebar";
 
 interface Props {
 	handleClickTheory: () => void;
-};
+}
 
 function Sidebar({ handleClickTheory }: Props) {
 	if (!modalList) return null;

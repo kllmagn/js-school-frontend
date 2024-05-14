@@ -8,6 +8,7 @@ import "./editor.css";
 export type TaskEditorProps = {
 	codeValue: string;
 	setCodeValue: (code: string) => void;
+	setSolutionData: (data: any) => void;
 };
 
 const TaskEditor = ({ codeValue, setCodeValue }: TaskEditorProps) => {
