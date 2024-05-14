@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./task.module.css";
-import { Sidebar } from "./sidebar/Sidebar";
 import { TheorySidebar } from "../../modals/TheorySidebar/TheorySidebar";
-import { StepsTask } from "./StepsTask/StepsTask";
 import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
 import { useLocation, useParams } from "react-router-dom";
 import { useTask } from "../../hooks/useTask";
 import { TaskGroup } from "../../hooks/useTaskgroups";
 import TaskEditor from "./TaskEditor/TaskEditor";
 import SolutionCheckContainer from "./SolutionCheckContainer/SolutionCheckContainer";
+import Sidebar from "./TaskSidebar/Sidebar";
+import SubTaskList from "./SubTaskList/SubTaskList";
 
 export function Task() {
 	const { state } = useLocation();
@@ -57,7 +57,7 @@ export function Task() {
 					</div>
 					<div className={styles.rightPart}>
 						<div style={{ width: "100%", height: "70%", zIndex: "1" }} />
-						<StepsTask
+						<SubTaskList
 							taskGroupId={taskGroupId}
 							setActiveStepIdx={setActiveStepIdx}
 						/>

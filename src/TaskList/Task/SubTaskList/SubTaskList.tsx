@@ -1,24 +1,23 @@
 import styles from "./stepstask.module.css";
 import { useTask } from "../../../hooks/useTask";
-import { StepElement } from "./StepElement/StepElement";
+import SubTask from "./SubTask/SubTask";
 
-type StepsTask = {
+type SubTaskListProps = {
 	taskGroupId: string | undefined;
 	setActiveStepIdx: (idx: number) => void;
 };
 
-export function StepsTask({
+function SubTaskList({
 	taskGroupId: taskgroupId,
 	setActiveStepIdx,
-}: StepsTask) {
+}: SubTaskListProps) {
 	const [stepsList] = useTask(taskgroupId);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.description}>
 				<a>Задания:</a>
 				{stepsList.map((step, index) => (
-					<StepElement
+					<SubTask
 						id={step.id}
 						description={step.description}
 						is_solved={step.is_solved}
@@ -32,3 +31,5 @@ export function StepsTask({
 		</div>
 	);
 }
+
+export default SubTaskList;

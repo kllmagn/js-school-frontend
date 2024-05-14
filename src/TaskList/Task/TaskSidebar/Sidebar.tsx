@@ -6,11 +6,10 @@ import { TheorySidebar } from "../../../modals/TheorySidebar/TheorySidebar";
 
 interface Props {
 	handleClickTheory: () => void;
-}
+};
 
-export function Sidebar({ handleClickTheory }: Props) {
+function Sidebar({ handleClickTheory }: Props) {
 	if (!modalList) return null;
-
 	return (
 		<>
 			<div className={styles.sidebar} onClick={handleClickTheory}>
@@ -36,3 +35,5 @@ export function Sidebar({ handleClickTheory }: Props) {
 		</>
 	);
 }
+
+export default Sidebar;

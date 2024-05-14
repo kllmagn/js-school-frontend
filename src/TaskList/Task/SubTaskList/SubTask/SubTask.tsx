@@ -1,11 +1,11 @@
 import { Task } from "../../../../hooks/useTask";
 import styles from "./stepelement.module.css";
 
-type StepElementProps = {
+type SubTaskProps = {
 	onStepClick: () => void;
 } & Task;
 
-export function StepElement({
+const SubTask = ({
 	id,
 	description,
 	is_solved = false,
@@ -13,10 +13,12 @@ export function StepElement({
 	group,
 	template,
 	onStepClick,
-}: StepElementProps) {
+}: SubTaskProps) => {
 	return (
 		<a className={styles.step} onClick={onStepClick}>
 			- {description}
 		</a>
 	);
 }
+
+export default SubTask;
