@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./Task.module.css";
+import styles from "./task.module.css";
 import { TheorySidebar } from "../../modals/TheorySidebar/TheorySidebar";
 import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
 import { useLocation, useParams } from "react-router-dom";
@@ -10,7 +10,10 @@ import SolutionCheckContainer from "./SolutionCheckContainer/SolutionCheckContai
 import Sidebar from "./TaskSidebar/Sidebar";
 import SubTaskList from "./SubTaskList/SubTaskList";
 import ApiClient from "../../api/client";
-import { refreshWrapper, useRefreshWrapper } from "../../hooks/useRefreshWrapper";
+import {
+	refreshWrapper,
+	useRefreshWrapper,
+} from "../../hooks/useRefreshWrapper";
 import GameWindow from "./TaskGameWindow/GameWindow";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshTokenSelector } from "../../redux/token/token.selector";
@@ -59,28 +62,28 @@ function splitCodeIntoAreas(
 }
 
 function useInterval(callback: () => void, delay: number) {
-    const savedCallback = useRef<() => void>();
-  
-    // Remember the latest callback.
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-  
-    // Set up the interval.
-    useEffect(() => {
-      function tick() {
-        savedCallback.current && savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  }
+	const savedCallback = useRef<() => void>();
+
+	// Remember the latest callback.
+	useEffect(() => {
+		savedCallback.current = callback;
+	}, [callback]);
+
+	// Set up the interval.
+	useEffect(() => {
+		function tick() {
+			savedCallback.current && savedCallback.current();
+		}
+		if (delay !== null) {
+			let id = setInterval(tick, delay);
+			return () => clearInterval(id);
+		}
+	}, [delay]);
+}
 
 export function Task() {
 	const [accessToken] = useRefreshWrapper();
-    const refreshToken = useSelector(refreshTokenSelector);
+	const refreshToken = useSelector(refreshTokenSelector);
 	const { state } = useLocation();
 	const { taskGroup } = state;
 	const { id, title, description } = taskGroup as TaskGroup;
@@ -96,7 +99,7 @@ export function Task() {
 	const [codeValue, setCodeValue] = useState(code || "");
 	const [solutionId, setSolutionId] = useState<number | null>(null);
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	let handleClickTheory = useCallback(() => {
 		setTheoryOpen(!isTheoryOpen);
@@ -124,22 +127,22 @@ export function Task() {
 			.then(async (response) => {
 				if (response.status == 201) {
 					let responseData = await response.json();
-                    console.log("settings solution id", responseData);
+					console.log("settings solution id", responseData);
 					setSolutionId(responseData.id);
 				} else {
-                    console.log("clearing solution id");
+					console.log("clearing solution id");
 					setSolutionId(null);
 				}
 			});
 	}, [activeSubTask, codeAreas, accessToken]);
 
 	useEffect(() => {
-        console.log("settings new code value")
+		console.log("settings new code value");
 		setCodeValue(code);
 	}, [code]);
 
 	useEffect(() => {
-        console.log("setting new code areas", codeValue, activeSubTask)
+		console.log("setting new code areas", codeValue, activeSubTask);
 		if (codeValue === null || activeSubTask === null) return;
 		setCodeAreas(
 			splitCodeIntoAreas(codeValue, activeSubTask.template.area_mapping),
@@ -147,20 +150,20 @@ export function Task() {
 	}, [codeValue, activeSubTask]);
 
 	useInterval(() => {
-        console.log("checking solution status", accessToken, solutionId)
-        if (accessToken === null || solutionId === null) return;
-        refreshWrapper(dispatch, accessToken, refreshToken);
-        new ApiClient(accessToken)
-            .get(`/solutions/${solutionId}`)
-            .then(async (response) => {
-                if (response.status !== 200) return;
-                const responseData = await response.json();
-                setActiveSubTaskStatus(responseData.status);
-            });
-    }, 5000);
+		console.log("checking solution status", accessToken, solutionId);
+		if (accessToken === null || solutionId === null) return;
+		refreshWrapper(dispatch, accessToken, refreshToken);
+		new ApiClient(accessToken)
+			.get(`/solutions/${solutionId}`)
+			.then(async (response) => {
+				if (response.status !== 200) return;
+				const responseData = await response.json();
+				setActiveSubTaskStatus(responseData.status);
+			});
+	}, 5000);
 
 	useEffect(() => {
-        console.log('new subtask status', activeSubTaskStatus);
+		console.log("new subtask status", activeSubTaskStatus);
 		if (activeSubTaskStatus === "accepted") {
 			setActiveSubTaskIdx(activeSubTaskIdx + 1);
 			setActiveSubTaskStatus(null);
