@@ -22,7 +22,7 @@ function SubTaskList({
 			<div className={styles.description}>
 				<a>Задания:</a>
 				{stepsList.map((step, index) => {
-					let subTaskStatus: SolutionStatus | null = null;
+					let subTaskStatus: string | null = null;
 					if (index < activeSubTaskIdx) {
 						subTaskStatus = "accepted";
 					} else if (index === activeSubTaskIdx) {

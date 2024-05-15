@@ -4,7 +4,7 @@ import styles from "./subtask.module.css";
 
 type SubTaskProps = {
 	onStepClick: () => void;
-	status: SolutionStatus | null;
+	status: string | null;
 } & Task;
 
 const SubTask = ({

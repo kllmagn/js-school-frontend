@@ -9,13 +9,17 @@
     border-left: 0;
     border-right: 0;
     border-color: #EFEFEF;
-
 }
 
 .listButtons {
     display: flex;
     width: 100%;
     height: 100%;
+}
+
+.listButtons [disabled] {
+    user-select: none;
+    backdrop-filter: grayscale(100%) brightness(70%);
 }
 
 .checkDecision {
@@ -32,7 +36,6 @@
     border-top: 0;
     border-bottom: 0;
     border-color: #EFEFEF;
-
 }
 
 .showAnswer {

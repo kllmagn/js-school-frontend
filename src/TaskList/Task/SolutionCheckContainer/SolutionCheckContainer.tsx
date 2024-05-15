@@ -4,11 +4,13 @@ import styles from "./solutioncheckcontainer.module.css";
 export type SolutionCheckContainerProps = {
 	onShowAnswer: () => void;
 	onSubmitSolution: () => void;
+	canSubmitSolution: boolean;
 };
 
 const SolutionCheckContainer = ({
 	onShowAnswer,
 	onSubmitSolution,
+	canSubmitSolution,
 }: SolutionCheckContainerProps) => {
 	return (
 		<div className={styles.container}>
@@ -16,7 +18,11 @@ const SolutionCheckContainer = ({
 				<button className={styles.showAnswer} onClick={onShowAnswer}>
 					Показать ответ
 				</button>
-				<button className={styles.checkDecision} onClick={onSubmitSolution}>
+				<button
+					className={styles.checkDecision}
+					disabled={!canSubmitSolution}
+					onClick={onSubmitSolution}
+				>
 					Проверить решение
 				</button>
 			</div>

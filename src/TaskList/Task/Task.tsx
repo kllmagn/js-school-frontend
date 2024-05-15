@@ -18,13 +18,14 @@ import GameWindow from "./TaskGameWindow/GameWindow";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshTokenSelector } from "../../redux/token/token.selector";
 
-export type SolutionStatus =
-	| "created"
-	| "in_progress"
-	| "error"
-	| "accepted"
-	| "rejected"
-	| "timeout";
+export enum SolutionStatus {
+	CREATED = "created",
+	IN_PROGRESS = "in_progress",
+	ERROR = "error",
+	ACCEPTED = "accepted",
+	REJECTED = "rejected",
+	TIMEOUT = "timeout",
+}
 
 function splitCodeIntoAreas(
 	code: string,
@@ -116,9 +117,11 @@ export function Task() {
 		let solutionData: { [areaId: string]: string } = {};
 		for (const area of codeAreas) {
 			if (area.areaId) {
-				solutionData[String(area.areaId)] = area.code;
+				solutionData[String(area.areaId)] = area.code + "\n";
 			}
 		}
+		setActiveSubTaskStatus(null);
+		setSolutionId(null);
 		new ApiClient(accessToken)
 			.post("/solutions", {
 				task_id: activeSubTask.id,
@@ -129,9 +132,7 @@ export function Task() {
 					let responseData = await response.json();
 					console.log("settings solution id", responseData);
 					setSolutionId(responseData.id);
-				} else {
-					console.log("clearing solution id");
-					setSolutionId(null);
+					setActiveSubTaskStatus(responseData.status_verbose);
 				}
 			});
 	}, [activeSubTask, codeAreas, accessToken]);
@@ -158,13 +159,13 @@ export function Task() {
 			.then(async (response) => {
 				if (response.status !== 200) return;
 				const responseData = await response.json();
-				setActiveSubTaskStatus(responseData.status);
+				setActiveSubTaskStatus(responseData.status_verbose);
 			});
 	}, 5000);
 
 	useEffect(() => {
 		console.log("new subtask status", activeSubTaskStatus);
-		if (activeSubTaskStatus === "accepted") {
+		if (activeSubTaskStatus === SolutionStatus.ACCEPTED) {
 			setActiveSubTaskIdx(activeSubTaskIdx + 1);
 			setActiveSubTaskStatus(null);
 		}
@@ -197,10 +198,21 @@ export function Task() {
 						<SolutionCheckContainer
 							onShowAnswer={handleShowAnswer}
 							onSubmitSolution={handleSubmitSolution}
+							canSubmitSolution={
+								accessToken !== null &&
+								(activeSubTaskStatus === null ||
+									![
+										SolutionStatus.IN_PROGRESS,
+										SolutionStatus.CREATED,
+									].includes(activeSubTaskStatus))
+							}
 						/>
 					</div>
 					<div className={styles.rightPart}>
-						<GameWindow solutionId={solutionId} />
+						<GameWindow
+							solutionId={solutionId}
+							solutionStatus={activeSubTaskStatus}
+						/>
 						<SubTaskList
 							taskGroupId={taskGroupId}
 							activeSubTaskIdx={activeSubTaskIdx}
