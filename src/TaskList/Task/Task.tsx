@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import styles from "./task.module.css";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import styles from "./Task.module.css";
 import { TheorySidebar } from "../../modals/TheorySidebar/TheorySidebar";
 import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
 import { useLocation, useParams } from "react-router-dom";
@@ -10,8 +10,10 @@ import SolutionCheckContainer from "./SolutionCheckContainer/SolutionCheckContai
 import Sidebar from "./TaskSidebar/Sidebar";
 import SubTaskList from "./SubTaskList/SubTaskList";
 import ApiClient from "../../api/client";
-import { useRefreshWrapper } from "../../hooks/useRefreshWrapper";
+import { refreshWrapper, useRefreshWrapper } from "../../hooks/useRefreshWrapper";
 import GameWindow from "./TaskGameWindow/GameWindow";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshTokenSelector } from "../../redux/token/token.selector";
 
 export type SolutionStatus =
 	| "created"
@@ -56,8 +58,29 @@ function splitCodeIntoAreas(
 	return codeAreas;
 }
 
+function useInterval(callback: () => void, delay: number) {
+    const savedCallback = useRef<() => void>();
+  
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current && savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
 export function Task() {
 	const [accessToken] = useRefreshWrapper();
+    const refreshToken = useSelector(refreshTokenSelector);
 	const { state } = useLocation();
 	const { taskGroup } = state;
 	const { id, title, description } = taskGroup as TaskGroup;
@@ -73,6 +96,8 @@ export function Task() {
 	const [codeValue, setCodeValue] = useState(code || "");
 	const [solutionId, setSolutionId] = useState<number | null>(null);
 
+    const dispatch = useDispatch();
+
 	let handleClickTheory = useCallback(() => {
 		setTheoryOpen(!isTheoryOpen);
 	}, [isTheoryOpen]);
@@ -83,8 +108,7 @@ export function Task() {
 	}, [accessToken]);
 
 	const handleSubmitSolution = useCallback(() => {
-		if (accessToken === null) return;
-		if (codeAreas.length === 0) return;
+		if (accessToken === null || codeAreas.length === 0) return;
 		// create solutionData object from codeAreas, key - areaId, value - code
 		let solutionData: { [areaId: string]: string } = {};
 		for (const area of codeAreas) {
@@ -100,38 +124,43 @@ export function Task() {
 			.then(async (response) => {
 				if (response.status == 201) {
 					let responseData = await response.json();
+                    console.log("settings solution id", responseData);
 					setSolutionId(responseData.id);
 				} else {
+                    console.log("clearing solution id");
 					setSolutionId(null);
 				}
 			});
 	}, [activeSubTask, codeAreas, accessToken]);
 
 	useEffect(() => {
+        console.log("settings new code value")
 		setCodeValue(code);
 	}, [code]);
 
 	useEffect(() => {
+        console.log("setting new code areas", codeValue, activeSubTask)
 		if (codeValue === null || activeSubTask === null) return;
 		setCodeAreas(
 			splitCodeIntoAreas(codeValue, activeSubTask.template.area_mapping),
 		);
 	}, [codeValue, activeSubTask]);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (accessToken === null || solutionId === null) return;
-			new ApiClient(accessToken)
-				.get(`/solutions/${solutionId}`)
-				.then(async (response) => {
-					const responseData = await response.json();
-					setActiveSubTaskStatus(responseData.status);
-				});
-		}, 5000);
-		return () => clearInterval(interval);
-	}, []);
+	useInterval(() => {
+        console.log("checking solution status", accessToken, solutionId)
+        if (accessToken === null || solutionId === null) return;
+        refreshWrapper(dispatch, accessToken, refreshToken);
+        new ApiClient(accessToken)
+            .get(`/solutions/${solutionId}`)
+            .then(async (response) => {
+                if (response.status !== 200) return;
+                const responseData = await response.json();
+                setActiveSubTaskStatus(responseData.status);
+            });
+    }, 5000);
 
 	useEffect(() => {
+        console.log('new subtask status', activeSubTaskStatus);
 		if (activeSubTaskStatus === "accepted") {
 			setActiveSubTaskIdx(activeSubTaskIdx + 1);
 			setActiveSubTaskStatus(null);
@@ -155,7 +184,6 @@ export function Task() {
 							<TaskEditor
 								data={codeAreas}
 								setAreaData={(idx, code) => {
-									console.log(idx, "setting", code);
 									setCodeAreas((prev) => {
 										prev[idx] = { ...prev[idx], code };
 										return [...prev];

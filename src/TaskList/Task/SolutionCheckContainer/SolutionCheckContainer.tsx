@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./solutioncheck.module.css";
+import styles from "./SolutionCheckContainer.module.css";
 
 export type SolutionCheckContainerProps = {
 	onShowAnswer: () => void;

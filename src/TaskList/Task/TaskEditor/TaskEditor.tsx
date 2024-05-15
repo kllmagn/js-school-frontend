@@ -3,7 +3,7 @@ import { highlight, languages } from "prismjs";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
-import styles from "./taskEditor.module.css";
+import styles from "./TaskEditor.module.css";
 
 export type CodeArea = {
 	areaId: number | null;
@@ -43,6 +43,7 @@ const TaskEditor = ({ data, setAreaData }: TaskEditorProps) => {
 							code,
 						)
 					}
+                    readOnly={area.areaId === null}
 					padding={10}
 					textareaId="codeArea"
 					className={`${styles.editorBlock} ${idx === data.length - 1 ? styles.areaLast : ""}`}

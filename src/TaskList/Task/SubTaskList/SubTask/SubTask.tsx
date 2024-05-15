@@ -1,6 +1,6 @@
 import { Task } from "../../../../hooks/useTask";
 import { SolutionStatus } from "../../Task";
-import styles from "./stepelement.module.css";
+import styles from "./SubTask.module.css";
 
 type SubTaskProps = {
 	onStepClick: () => void;

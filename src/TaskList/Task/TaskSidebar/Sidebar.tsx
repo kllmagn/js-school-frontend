@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./sidebar.module.css";
+import styles from "./Sidebar.module.css";
 import { modalList } from "../../../Header/Profile/Profile";
 import { createPortal } from "react-dom";
 import { TheorySidebar } from "../../../modals/TheorySidebar/TheorySidebar";

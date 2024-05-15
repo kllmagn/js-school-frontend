@@ -1,4 +1,4 @@
-import styles from "./stepstask.module.css";
+import styles from "./SubTaskList.module.css";
 import { useTask } from "../../../hooks/useTask";
 import SubTask from "./SubTask/SubTask";
 import { SolutionStatus } from "../Task";

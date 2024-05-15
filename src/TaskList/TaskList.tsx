@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./tasklist.module.css";
+import styles from "./TaskList.module.css";
 import { TaskListElement } from "./TaskListElement/TaskListElement";
 import _ from "lodash";
 import { useLocation, useNavigate, useParams } from "react-router-dom";

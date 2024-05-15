@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./nexttaskbutton.module.css";
+import styles from "./NextTaskButton.module.css";
 
 export function NextTaskButton() {
 	return (

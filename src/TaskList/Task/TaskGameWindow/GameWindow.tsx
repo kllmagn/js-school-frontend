@@ -13,6 +13,7 @@ const GameWindow = ({ solutionId }: GameWindowProps) => {
 			}}
 			frameBorder="0"
 			allowFullScreen
+            sandbox="allow-same-origin allow-scripts"
 		></iframe>
 	) : (
 		<div
