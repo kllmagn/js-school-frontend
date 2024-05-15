@@ -3,8 +3,8 @@ import { useRefreshWrapper } from "./useRefreshWrapper";
 import ApiClient from "../api/client";
 
 export type Template = {
-	content: string[];
-	area_mapping: Record<string, string>;
+	content: string;
+	area_mapping: { [key: string]: number };
 };
 
 export type Task = {
@@ -31,7 +31,7 @@ export function useTask(taskgroupId: string | undefined) {
 	let [data, setData] = useState<Task[]>([]);
 	let [accessToken] = useRefreshWrapper();
 	useEffect(() => {
-		if (taskgroupId == undefined || !/\d+/.test(taskgroupId)) {
+		if (taskgroupId === undefined || !/\d+/.test(taskgroupId)) {
 			return;
 		}
 		if (accessToken === null) return;
@@ -39,7 +39,7 @@ export function useTask(taskgroupId: string | undefined) {
 			.get(`/tasks?group__id=${taskgroupId}`)
 			.then(async (response) => {
 				const text = await response.text();
-				if (response.status == 200) {
+				if (response.status === 200) {
 					let responseData: TaskList = JSON.parse(text);
 					setData(responseData.results);
 				} else {

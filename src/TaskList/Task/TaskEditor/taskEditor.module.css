@@ -1,18 +1,29 @@
-.editor {
+.editorContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 95%;
+}
+
+.editorContainer > .areaLast {
+    flex-grow: 1;
+}
+
+.editorBlock {
     counter-reset: line;
     border: 1px solid #ced4da;
 }
   
-.editor #codeArea {
+.editorBlock textarea {
     outline: none;
     padding-left: 60px !important;
 }
 
-.editor pre {
+.editorBlock pre {
     padding-left: 60px !important;
 }
 
-.editor .editorLineNumber {
+.editorBlock .editorLineNumber {
     position: absolute;
     left: 0px;
     color: #cccccc;

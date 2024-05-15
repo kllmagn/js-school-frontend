@@ -5,17 +5,13 @@ import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
 import { useLocation, useParams } from "react-router-dom";
 import { useTask } from "../../hooks/useTask";
 import { TaskGroup } from "../../hooks/useTaskgroups";
-import TaskEditor from "./TaskEditor/TaskEditor";
+import TaskEditor, { CodeArea } from "./TaskEditor/TaskEditor";
 import SolutionCheckContainer from "./SolutionCheckContainer/SolutionCheckContainer";
 import Sidebar from "./TaskSidebar/Sidebar";
 import SubTaskList from "./SubTaskList/SubTaskList";
 import ApiClient from "../../api/client";
 import { useRefreshWrapper } from "../../hooks/useRefreshWrapper";
 import GameWindow from "./TaskGameWindow/GameWindow";
-
-export type SolutionData = {
-	[areaId: string]: string;
-};
 
 export type SolutionStatus =
 	| "created"
@@ -24,6 +20,41 @@ export type SolutionStatus =
 	| "accepted"
 	| "rejected"
 	| "timeout";
+
+function splitCodeIntoAreas(
+	code: string,
+	areaMapping: { [lineIndex: string]: number },
+): CodeArea[] {
+	const lines = code.split("\n");
+	const codeAreas: CodeArea[] = [];
+	let currentArea: string[] = [];
+	for (let i = 0; i < lines.length; i++) {
+		if (areaMapping[i]) {
+			if (currentArea.length > 0) {
+				codeAreas.push({
+					areaId: null,
+					code: currentArea.join("\n"),
+				});
+				currentArea = [];
+			}
+			codeAreas.push({
+				areaId: areaMapping[i],
+				code: "// ваш код здесь",
+			});
+		} else {
+			// This line doesn't have an areaId, so add it to the current area
+			currentArea.push(lines[i]);
+		}
+	}
+	// Add the last area
+	if (currentArea.length > 0) {
+		codeAreas.push({
+			areaId: null,
+			code: currentArea.join("\n"),
+		});
+	}
+	return codeAreas;
+}
 
 export function Task() {
 	const [accessToken] = useRefreshWrapper();
@@ -37,11 +68,10 @@ export function Task() {
 	const [activeSubTaskStatus, setActiveSubTaskStatus] =
 		useState<SolutionStatus | null>(null);
 	const [isTheoryOpen, setTheoryOpen] = useState(false);
-	const content = stepsList[activeSubTaskIdx]?.template?.content ?? null;
-	const code = content ? content.join("") : content;
+	const code = stepsList[activeSubTaskIdx]?.template?.content ?? null;
+	const [codeAreas, setCodeAreas] = useState<CodeArea[]>([]);
 	const [codeValue, setCodeValue] = useState(code || "");
 	const [solutionId, setSolutionId] = useState<number | null>(null);
-	const [solutionData, setSolutionData] = useState<SolutionData | null>(null);
 
 	let handleClickTheory = useCallback(() => {
 		setTheoryOpen(!isTheoryOpen);
@@ -54,23 +84,39 @@ export function Task() {
 
 	const handleSubmitSolution = useCallback(() => {
 		if (accessToken === null) return;
-		if (solutionData === null) return;
+		if (codeAreas.length === 0) return;
+		// create solutionData object from codeAreas, key - areaId, value - code
+		let solutionData: { [areaId: string]: string } = {};
+		for (const area of codeAreas) {
+			if (area.areaId) {
+				solutionData[String(area.areaId)] = area.code;
+			}
+		}
 		new ApiClient(accessToken)
 			.post("/solutions", {
-				taskId: activeSubTask.id,
+				task_id: activeSubTask.id,
 				data: solutionData,
 			})
 			.then(async (response) => {
 				if (response.status == 201) {
 					let responseData = await response.json();
 					setSolutionId(responseData.id);
+				} else {
+					setSolutionId(null);
 				}
 			});
-	}, [activeSubTask, solutionData, setSolutionId]);
+	}, [activeSubTask, codeAreas, accessToken]);
 
 	useEffect(() => {
 		setCodeValue(code);
 	}, [code]);
+
+	useEffect(() => {
+		if (codeValue === null || activeSubTask === null) return;
+		setCodeAreas(
+			splitCodeIntoAreas(codeValue, activeSubTask.template.area_mapping),
+		);
+	}, [codeValue, activeSubTask]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -107,9 +153,14 @@ export function Task() {
 					<div className={styles.leftPart}>
 						{codeValue !== null && (
 							<TaskEditor
-								codeValue={codeValue}
-								setCodeValue={setCodeValue}
-								setSolutionData={setSolutionData}
+								data={codeAreas}
+								setAreaData={(idx, code) => {
+									console.log(idx, "setting", code);
+									setCodeAreas((prev) => {
+										prev[idx] = { ...prev[idx], code };
+										return [...prev];
+									});
+								}}
 							/>
 						)}
 						<SolutionCheckContainer
