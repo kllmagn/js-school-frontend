@@ -165,7 +165,7 @@ export function Task() {
 
 	useEffect(() => {
 		console.log("new subtask status", activeSubTaskStatus);
-		if (activeSubTaskStatus === SolutionStatus.ACCEPTED) {
+		if (activeSubTaskStatus === SolutionStatus.ACCEPTED && activeSubTaskIdx < stepsList.length - 1) {
 			setActiveSubTaskIdx(activeSubTaskIdx + 1);
 			setActiveSubTaskStatus(null);
 		}
