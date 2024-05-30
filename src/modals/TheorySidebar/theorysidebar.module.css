@@ -13,10 +13,11 @@
 }
 
 .theoryLayout {
+    margin-top: 1%;
     margin-left: 1%;
     position:  absolute;
     width: 45%;
-    height: 99%;
+    height: 96%;
     z-index: 1;
     background-color: white;
 }
@@ -49,4 +50,11 @@
     line-height: 20px;
     font-size: 16px;
     color: #000000;
+}
+
+.closeSvg:hover {
+    transform: scale(1.3);
+    fill: #000000;
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
 }

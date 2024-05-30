@@ -1,74 +1,90 @@
+@font-face { font-family: codec-pro; src: url('./codec-pro.regular.ttf'); } 
 
 .header {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #A585FF;
     width: 100%;
-    height: 63px;
-   
+    height: 7%;
+    font-family: "codec-pro", system-ui;
+    background: 0;
+    padding-top: 0.5%;
+    display: flex;
+    align-items: center;
+    gap: 10%;
+}
+/* Desktop - main page 12 */
+
+.logoContainer {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-left: 2%;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20%;
+    height: 100%;
 }
 
 .logo {
-    display: flex;
-    width: 187px;
-    height: 60px;
-}
-
-.logo img {
-    width: 38;
-    height: 38px;
-    margin-top: 12px;
-    margin-left: 38px;
-}
-.logo a {
-    
-    font-size: 18px;
+    width: 50px;
+    height: 50px;
     margin: 0;
-    padding: 0;
+    margin-right: 10%;
+}
+.logoTitle {
+    font-size: 18px;
+    display: flex;
   
 }
 
-.container {
 
-    margin-top: 8px;
-    margin-left: 13px;
-    width: 93px;
-    height: 42px;
+.menuContainer {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 4%;
+    margin-left: 6%;
+
+
+
 }
 
-.menu {
-    flex-grow: 1;
-  }
-.menu ul {
+.searchContainer {
+    align-items: center;
+    justify-content: center;
+    position: relative;
     display: flex;
-    flex-flow: row nowrap;
+    gap: 5%;
+}
+
+.icon {
+    display: flex;
+    width: 25px;
+    height: 25px;
     margin: 0;
     padding: 0;
-    list-style: none;
 }
 
-.menu ul > li {
-    margin-right: 20px;
-}
 
-.menu ul > li:first-child {
-    margin-left: auto;
-}
-.menu ul > li:last-child {
-    margin-right: 30px;
-}
-a {
-    color: #FFFFFF;
-}
+
 .menu a:hover {
     color: #5AD77D;
     cursor: pointer;
 }
 
 .logo :hover {
-    color: #6a6a6a;
+    color: #000000;
     transform: scale(1.02);
     cursor: pointer;
 }
+
+
+.searchContainer .icon:hover { 
+    stroke:  #5AD77D !important; 
+}
+.menuContainer a:hover {
+    color: #5AD77D;
+    cursor: pointer;
+}
+

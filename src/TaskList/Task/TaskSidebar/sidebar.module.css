@@ -3,9 +3,7 @@
     position: relative;
     width: 44px;
     height: 100%;
-    border-width: 0.1px;
-    border-style: solid;
-    border-top: none;
+  
 }
 
 .sidebarInner {
@@ -14,16 +12,20 @@
     height: 100%;
     width: 100%;
     display:grid;
+    background-color: #515151;
+    
+    
 
     
 }
 
 .titleSidebar {
+    font-family: "gilroy-bold", system-ui !important;
     display: block;
     align-self: center;
     white-space: nowrap;
     transform: rotate(-90deg);
-    color: black;
+    color: rgb(255, 255, 255);
     margin-right: 50%;
 }
 
@@ -33,6 +35,5 @@
 }
 
 .sidebar:hover {
-    background-color: #EFEFEF;
-    cursor: pointer;
+   
 }

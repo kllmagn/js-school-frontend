@@ -23,6 +23,7 @@
 }
 
 .checkDecision {
+    font-family: "gilroy-light", system-ui !important;
     display: block;
     border-color: #C0C0C0;
     box-shadow:none;
@@ -39,6 +40,7 @@
 }
 
 .showAnswer {
+    font-family: "gilroy-light", system-ui !important;
     display: block;
     border-color: #C0C0C0;
     box-shadow:none;

@@ -8,7 +8,6 @@ function App() {
 	return (
 		<div className={styles.app}>
 			<Provider store={store}>
-				<Header />
 				<Main />
 			</Provider>
 		</div>

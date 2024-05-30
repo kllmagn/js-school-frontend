@@ -1,0 +1,11 @@
+.layoutContainer {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.layoutContent {
+
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}

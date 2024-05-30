@@ -53,82 +53,57 @@ export function ChangePasswordPage() {
 		}
 	}
 
-	function handleNewPasswordChange(event: ChangeEvent<HTMLTextAreaElement>) {
+	function handleNewPasswordChange(event: ChangeEvent<HTMLInputElement>) {
 		setNewPasswordValue(event.target.value);
 	}
 
-	function handlePasswordChange(event: ChangeEvent<HTMLTextAreaElement>) {
+	function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
 		setPasswordChange(event.target.value);
 	}
 
-	function handlePasswordConfirmation(event: ChangeEvent<HTMLTextAreaElement>) {
+	function handlePasswordConfirmation(event: ChangeEvent<HTMLInputElement>) {
 		setPasswordConfirmation(event.target.value);
 	}
 
 	return (
-		<div className={styles.page}>
-			<div className={styles.container}>
-				<div></div>
-				<div className={styles.layoutLeft}>
-					<a onClick={useLinkClickHandler("/settings")}>
-						Редактирование профиля
-					</a>
-					<a className={styles.selected}>Изменить пароль</a>
-					<a onClick={useLinkClickHandler("/changeMail")}>Изменить почту</a>
-				</div>
-				<div className={styles.layoutRight}>
-					<a className={styles.mainHeader}>Изменить пароль</a>
-					<svg
-						className={styles.lineSvg}
-						viewBox="0 0 878 2"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<line x1="-0.00732422" y1="1" x2="1000001" y2="1" stroke="black" />
-					</svg>
-					<form onSubmit={handleSubmit}>
-						<div className={styles.mainContent}>
-							<a>текущий пароль</a>
-							<textarea
-								className={styles.textareaName}
-								value={passwordValue}
-								onChange={handlePasswordChange}
-							></textarea>
-						</div>
-						<div className={styles.mainContent}>
-							<a>новый пароль</a>
-							<textarea
-								className={styles.textareaName}
-								value={newPasswordValue}
-								onChange={handleNewPasswordChange}
-							></textarea>
-						</div>
-						<div className={styles.mainContent}>
-							<a>повторите пароль</a>
-							<textarea
-								className={styles.textareaName}
-								value={passwordConfirmation}
-								onChange={handlePasswordConfirmation}
-							></textarea>
-						</div>
-						<svg
-							className={styles.lineSvg}
-							viewBox="0 0 878 2"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<line
-								x1="-0.00732422"
-								y1="1"
-								x2="1000001"
-								y2="1"
-								stroke="black"
-							/>
-						</svg>
-						<button className={styles.saveButton}>Сохранить изменения</button>
-					</form>
-				</div>
-			</div>
-		</div>
+        <div className={styles.container}>
+            <div></div>
+            <div className={styles.layoutLeft}>
+                <a onClick={useLinkClickHandler("/settings")}>
+                    Редактирование профиля
+                </a>
+                <a className={styles.selected}>Изменить пароль</a>
+                <a onClick={useLinkClickHandler("/changeMail")}>Изменить почту</a>
+            </div>
+            <div className={styles.layoutRight}>
+                <a className={styles.mainHeader}>Изменить пароль</a>
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.mainContent}>
+                        <a>текущий пароль</a>
+                        <input
+                            className={styles.inputName}
+                            value={passwordValue}
+                            onChange={handlePasswordChange}
+                        ></input>
+                        <a>новый пароль</a>
+                        <input
+                            className={styles.inputName}
+                            value={newPasswordValue}
+                            onChange={handleNewPasswordChange}
+                        ></input>
+                        <a>повторите пароль</a>
+                        <input
+                            className={styles.inputName}
+                            value={passwordConfirmation}
+                            onChange={handlePasswordConfirmation}
+                        ></input>
+                        <button className={styles.saveButton}>Сохранить изменения</button>
+                    </div>
+                  
+                    
+                </form>
+            </div>
+        </div>
 	);
 }
