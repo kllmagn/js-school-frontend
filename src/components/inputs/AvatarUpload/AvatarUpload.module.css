@@ -1,0 +1,26 @@
+.avatarUpload {
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.inputFile {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.avatarUpload:hover > .inputFile {
+    display: flex;
+    z-index: 10;
+    backdrop-filter: brightness(50%);
+}
+
+.avatarUpload > input[type="file"] {
+    display: none;
+}

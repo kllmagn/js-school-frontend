@@ -1,0 +1,22 @@
+.labelContainer {
+    display: flex;
+    flex-direction: row;
+    box-sizing: content-box;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.labelPrimary {
+    background-color: white;
+    padding: 5px;
+    white-space: nowrap;
+    color: black;
+}
+
+.labelSecondary {
+    background-color: #515151;
+    flex: 1;
+    padding: 5px;
+    white-space: nowrap;
+    color: white;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
-import ApiClient from "../api/client";
+import ApiClient from "api/client";
 
 export type Template = {
 	content: string;

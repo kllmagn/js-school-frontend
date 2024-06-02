@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
-import ApiClient from "../api/client";
+import ApiClient from "api/client";
 
 type CategoryLevel = {
 	id: number;
@@ -29,7 +29,7 @@ export function useCategoryLevelData() {
 			.get("/category_levels")
 			.then(async (response) => {
 				const text = await response.text();
-				if (response.status == 200) {
+				if (response.status === 200) {
 					let responseData: CategoryLevelList = JSON.parse(text);
 					setData(responseData.results);
 				} else {

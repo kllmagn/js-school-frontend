@@ -1,0 +1,86 @@
+.page {
+    width: 100%;
+    height: 100%;
+    background-color: #DFDCF1;
+}
+
+.selected {
+    text-align: center;
+    width: 90%;
+    background-color: #515151;
+    color: white !important;
+    padding: 2%;
+    border-radius: 16px;
+}
+
+
+.mainHeader {
+    font-size: 32px !important;
+    font-weight:lighter;
+    background: #515151;;
+    color: white !important;
+    border-radius: 16px;
+    padding: 1%;
+    width: 45%;
+}
+
+.layoutRight a{
+    font-size: 24px;
+    color: black;
+}
+
+
+
+.lineSvg {
+    width: 100%;
+    height: 0.1px;
+    color: #515151;
+}
+
+.inputName, select{
+    width: 30%;
+    height: 10%;
+    border-radius: 5px;
+    border: 0;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.mainContent {
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap: 2%;
+    margin-left: 2%;
+    flex-direction: column;
+    
+}
+
+
+.saveButton {
+    margin-top: 5%;
+    border: 0;
+    background: 0;
+    border-style: solid;
+    width: 30%;
+    height: 10%;
+    border-radius: 16px;
+    font-size: 18px;
+    border-color: #5AD77D;
+    font-family: "gilroy-light", system-ui;
+    border-width: 1px;
+}
+
+.saveButton:hover {
+    transform: scale(1.03);
+    background-color: #5AD77D;
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+
+.layoutLeft a:hover{
+    color: #5265f6; 
+}

@@ -1,0 +1,43 @@
+.base {
+    padding: 10px 15px;
+    border: 0;
+    background-color: var(--button-main-color);
+    color: white;
+    cursor: pointer;
+}
+
+.base:hover {
+    backdrop-filter: brightness(40%);
+}
+
+.outlined {
+    border: solid;
+    border-width: 1px;
+    border-color: var(--button-main-color);
+    background-color: transparent;
+    color: inherit;
+}
+
+.outlined:hover {
+    background-color: var(--button-main-color);
+    color: white;
+}
+
+.rounded {
+    border-radius: 16px;
+}
+
+.small {
+    height: 40px;
+    font-size: 100%;
+}
+
+.medium {
+    height: 55px;
+    font-size: 120%;
+}
+
+.large {
+    height: 70px;
+    font-size: 140%;
+}

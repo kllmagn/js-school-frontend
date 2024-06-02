@@ -47,3 +47,10 @@ yarn-error.log*
 
 .vscode
 !.vscode/settings.json
+
+# React Component Preview
+previewConfig.json
+*storybook.log
+
+.storybook
+stories

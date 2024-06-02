@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
 	accessTokenSelector,
 	refreshTokenSelector,
-} from "../redux/token/token.selector";
+} from "store/token/token.selector";
 import { useDispatch, useSelector } from "react-redux";
-import { setTokenAccess } from "../redux/token/token.slice";
-import ApiClient from "../api/client";
+import { setTokenAccess } from "store/token/token.slice";
+import ApiClient from "api/client";
 import { Dispatch } from "redux";
 
 export const refreshWrapper = (

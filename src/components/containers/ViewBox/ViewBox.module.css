@@ -1,0 +1,8 @@
+.viewBoxContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+    background: linear-gradient(183.02deg, rgba(224, 224, 224, 0.5) 2.51%, rgba(113, 131, 118, 0.135) 46.45%);
+    padding-bottom: 5%;
+    border-radius: 16px;
+    padding-top: 2%;
+}

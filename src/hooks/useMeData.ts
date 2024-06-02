@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
-import ApiClient from "../api/client";
+import ApiClient from "api/client";
 
 type User = {
 	id: number;
@@ -20,7 +20,7 @@ export function useMeData() {
 		if (accessToken === null) return;
 		new ApiClient(accessToken).get("/profile/me").then(async (response) => {
 			const text = await response.text();
-			if (response.status == 200) {
+			if (response.status === 200) {
 				let responseData: User = JSON.parse(text);
 				setData(responseData);
 			} else {
@@ -31,4 +31,3 @@ export function useMeData() {
 	}, [accessToken]);
 	return [data];
 }
-

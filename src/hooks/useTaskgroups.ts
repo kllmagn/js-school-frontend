@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
-import ApiClient from "../api/client";
+import ApiClient from "api/client";
 
 export type TaskGroup = {
 	id: number;
@@ -27,7 +27,7 @@ export function useTaskGroupsData(categoryId: string | undefined) {
 	let [data, setData] = useState<TaskGroup[]>([]);
 	let [accessToken] = useRefreshWrapper();
 	useEffect(() => {
-		if (categoryId == undefined || !/\d+/.test(categoryId)) {
+		if (categoryId === undefined || !/\d+/.test(categoryId)) {
 			return;
 		}
 		if (accessToken === null) return;
@@ -35,7 +35,7 @@ export function useTaskGroupsData(categoryId: string | undefined) {
 			.get(`/taskgroups?category__id=${categoryId}`)
 			.then(async (response) => {
 				const text = await response.text();
-				if (response.status == 200) {
+				if (response.status === 200) {
 					let responseData: TaskGroupList = JSON.parse(text);
 					setData(responseData.results);
 				} else {

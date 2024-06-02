@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-	accessTokenSelector,
-	refreshTokenSelector,
-} from "../redux/token/token.selector";
-import { useDispatch, useSelector } from "react-redux";
-import { setTokenAccess } from "../redux/token/token.slice";
 import { useRefreshWrapper } from "./useRefreshWrapper";
-import ApiClient from "../api/client";
+import ApiClient from "api/client";
 
 type Category = {
 	id: number;
@@ -38,7 +32,7 @@ export function useCategoryData(categoryId: number) {
 			},
 		}).then(async (response) => {
 			const text = await response.text();
-			if (response.status == 200) {
+			if (response.status === 200) {
 				let responseData: Category = JSON.parse(text);
 				setData(responseData);
 			} else {
@@ -46,7 +40,7 @@ export function useCategoryData(categoryId: number) {
 				console.log(responseData.detail);
 			}
 		});
-	}, [accessToken]);
+	}, [accessToken, categoryId]);
 	return [data];
 }
 
@@ -54,12 +48,12 @@ export function useCategoriesData(levelId: number) {
 	let [data, setData] = useState<Category[]>([]);
 	let [accessToken] = useRefreshWrapper();
 	useEffect(() => {
-		if (accessToken == null) return;
+		if (accessToken === null) return;
 		new ApiClient(accessToken)
 			.get(`/categories?level__id=${levelId}`)
 			.then(async (response) => {
 				const text = await response.text();
-				if (response.status == 200) {
+				if (response.status === 200) {
 					let responseData: CategoryList = JSON.parse(text);
 					setData(responseData.results.sort((b, a) => b.id - a.id));
 				} else {
@@ -67,6 +61,6 @@ export function useCategoriesData(levelId: number) {
 					console.log(responseData.detail);
 				}
 			});
-	}, [accessToken]);
+	}, [accessToken, levelId]);
 	return [data];
 }
