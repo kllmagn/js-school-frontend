@@ -1,0 +1,84 @@
+// Mixin for button base styles
+.button-base() {
+    padding: 10px 15px;
+    border: 0;
+    color: @font-color-secondary;
+    cursor: pointer;
+
+    &:hover {
+        backdrop-filter: brightness(40%);
+    }
+}
+
+// Mixin for outlined buttons
+.button-outlined {
+    border: solid 1px var(--button-bg-color) !important;
+    background-color: transparent !important;
+    color: inherit !important;
+
+    &:hover {
+        background-color: var(--button-bg-color) !important;
+        color: @font-color-secondary !important;
+    }
+}
+
+// Mixin for button colors
+.button-color(@color) {
+    background-color: @color;
+}
+
+// Mixin for button sizes
+.button-size(@height, @font-size) {
+    height: @height;
+    font-size: @font-size;
+}
+
+// Button classes
+.base {
+    .button-base();
+}
+
+.outlined {
+    .button-base();
+    .button-outlined();
+}
+
+.primary {
+    --button-bg-color: @button-color-primary;
+    .button-base();
+    .button-color(@button-color-primary;);
+}
+
+.secondary {
+    --button-bg-color: @button-color-secondary;
+    .button-base();
+    .button-color(@button-color-secondary);
+}
+
+.warning {
+    --button-bg-color: @button-color-warning;
+    .button-base();
+    .button-color(@button-color-warning);
+}
+
+.danger {
+    --button-bg-color: @button-color-danger;
+    .button-base();
+    .button-color(@button-color-danger);
+}
+
+.rounded {
+    border-radius: 16px;
+}
+
+.small {
+    .button-size(@button-height-small, 100%);
+}
+
+.medium {
+    .button-size(@button-height-medium, 120%);
+}
+
+.large {
+    .button-size(@button-height-large, 140%);
+}

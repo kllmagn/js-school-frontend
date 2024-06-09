@@ -2,15 +2,14 @@
 
 .header {
     width: 100%;
-    height: 7%;
+    height: 3.5rem;
     font-family: "codec-pro", system-ui;
     background: 0;
-    padding-top: 0.5%;
+    padding-top: 5px;
     display: flex;
     align-items: center;
     gap: 10%;
 }
-/* Desktop - main page 12 */
 
 .logoContainer {
     display: flex;
@@ -29,12 +28,11 @@
     margin: 0;
     margin-right: 10%;
 }
+
 .logoTitle {
     font-size: 18px;
     display: flex;
-  
 }
-
 
 .menuContainer {
     width: 60%;
@@ -45,9 +43,6 @@
     justify-content:flex-start;
     gap: 4%;
     margin-left: 6%;
-
-
-
 }
 
 .searchContainer {
@@ -66,8 +61,6 @@
     padding: 0;
 }
 
-
-
 .menu a:hover {
     color: #5AD77D;
     cursor: pointer;
@@ -79,12 +72,11 @@
     cursor: pointer;
 }
 
-
 .searchContainer .icon:hover { 
     stroke:  #5AD77D !important; 
 }
+
 .menuContainer a:hover {
     color: #5AD77D;
     cursor: pointer;
 }
-

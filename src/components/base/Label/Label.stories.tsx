@@ -6,7 +6,7 @@ import Text from "components/base/Text";
 const meta: Meta<typeof Label> = {
 	component: Label,
 	argTypes: {
-		text: {
+		children: {
 			control: { type: "text" },
 		},
 		secondaryText: {
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof Label>;
 
 export const Primary: Story = {
 	args: {
-		text: <Text font="gilroyBold">Уровень 1</Text>,
+		children: <Text font="gilroyBold">Уровень 1</Text>,
 		secondaryText: <Text font="gilroyLight">Пример текста</Text>,
 	},
 };

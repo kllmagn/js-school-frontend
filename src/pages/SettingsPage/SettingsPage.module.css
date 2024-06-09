@@ -29,8 +29,6 @@
     color: black;
 }
 
-
-
 .lineSvg {
     width: 100%;
     height: 0.1px;
@@ -48,16 +46,12 @@
 }
 
 .mainContent {
-    margin-top: 5%;
     height: 100%;
     width: 100%;
     display: flex;
     gap: 2%;
-    margin-left: 2%;
     flex-direction: column;
-    
 }
-
 
 .saveButton {
     margin-top: 5%;

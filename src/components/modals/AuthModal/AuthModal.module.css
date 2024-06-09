@@ -5,13 +5,13 @@
     background-color: #000000;
     opacity: 48%;
     z-index: 1;
-  }
+}
   
-  .closeSvg {
+.closeSvg {
     align-self: self-end;
-  }
+}
   
-  .registrationModal {
+.registrationModal {
     border-radius: 1%;
     display: flex;
     position:  absolute;
@@ -25,71 +25,70 @@
     background-color: #FFFFFF;
     opacity: 100%;
     z-index: 2;
-  }
+}
 
-  .textRegistration {
+.textRegistration {
     padding-top: 20px;
     color: #000000;
     font-size: 32px;
+}
   
-  }
-  
-  .registrationModal a {
+.registrationModal a {
     color: #000000;
-  }
+}
   
-  .lineContainer {
+.lineContainer {
     display: flex;
     position: relative;
     align-items: center;
     width: auto;
     gap: 10%;
     margin-top: 20px;
-  }
+}
   
-  .lineContainer a {
+.lineContainer a {
     text-align: center;
-  }
-  .logo {
+}
+
+.logo {
     display: flex;
     gap: 20px;
     padding-top: 10px;
-  }
+}
   
-  .line {
+.line {
     width: 40%;
-  }
+}
   
-  .containerForm {
+.containerForm {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     height: 100%;
-    margin-top: 50px;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
-  }
-  .containerForm a {
-    
+}
+
+.containerForm a {
     padding-left: 5%;
     font-size: 13px;
-  }
+}
   
-  .formsModal textarea {
+.formsModal textarea {
     width: 70%;
     align-self: center;
     color: rgb(0 0 0 / 20%);;
-  }
+}
    
-  .formsModal {
+.formsModal {
     display: flex;
     gap: 20px;
     flex-direction: column;
-  }
+}
   
-  .buttonRegist {
+.buttonRegist {
     align-self: center;
     width: 70%;
     height: 30%;
@@ -98,9 +97,9 @@
     border: 0;
     font-size: 16px;
     border-radius: 4px;
-  }
+}
   
-  .buttonEnter {
+.buttonEnter {
     margin-top: 20px;
     align-self: center;
     border: 1px solid #000000;
@@ -110,14 +109,13 @@
     font-size: 16px;
     background-color: #FFFFFF;
     color: #AF9BFF;
-  }
+}
 
-  .gavnoContainer {
+.gavnoContainer {
     display: flex;
-  }
+    gap: 10px;
+}
 
-  .gavno {
+.gavno {
     align-self: self-end;
-  }
-  
-
+}

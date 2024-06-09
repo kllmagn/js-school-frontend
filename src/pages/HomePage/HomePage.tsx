@@ -1,11 +1,11 @@
 import { useCategoryLevelData } from "hooks/useCategoryLevels";
 import styles from "./HomePage.module.css";
-import { Level } from "components/containers/Level/Level";
+import Level from "components/containers/Level/Level";
 
 const HomePage = () => {
 	const [data] = useCategoryLevelData();
 	return (
-		<div className={styles.container}>
+		<>
 			{data
 				.sort((a, b) => a.order - b.order)
 				.map((item) => (
@@ -17,7 +17,7 @@ const HomePage = () => {
 						order={item.order}
 					/>
 				))}
-		</div>
+		</>
 	);
 };
 

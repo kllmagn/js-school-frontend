@@ -6,23 +6,21 @@ import { useState } from "react";
 const meta: Meta<typeof SearchBox> = {
 	component: SearchBox,
 	argTypes: {
-        query: {
-            control: "text",
-        },
-    },
+		query: {
+			control: "text",
+		},
+	},
 };
 
 export default meta;
 type Story = StoryObj<typeof SearchBox>;
 
 export const Primary: Story = {
-    render: (args) => {
-        const [query, setQuery] = useState("");
-        return (
-            <SearchBox {...args} query={query} setQuery={setQuery}/>
-        );
-    },
+	render: (args) => {
+		const [query, setQuery] = useState("");
+		return <SearchBox {...args} query={query} setQuery={setQuery} />;
+	},
 	args: {
-        query: "",
-    },
+		query: "",
+	},
 };

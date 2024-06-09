@@ -52,5 +52,4 @@ yarn-error.log*
 previewConfig.json
 *storybook.log
 
-.storybook
 stories

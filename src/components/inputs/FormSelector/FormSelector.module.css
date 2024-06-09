@@ -1,0 +1,39 @@
+.formSelector {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+  
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.25rem;
+}
+  
+.select {
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #4a5568;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+  
+.select:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+  
+.error {
+    border-color: #e53e3e;
+}
+  
+.error:focus {
+    border-color: #e53e3e;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.5);
+}
+  

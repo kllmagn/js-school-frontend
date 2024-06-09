@@ -12,6 +12,7 @@ type Story = StoryObj<typeof AvatarUpload>;
 
 export const Primary: Story = {
 	args: {
-        backgroundSrc: "https://farm3.staticflickr.com/2220/1572613671_7311098b76_z_d.jpg",
-    },
+		backgroundSrc:
+			"https://farm3.staticflickr.com/2220/1572613671_7311098b76_z_d.jpg",
+	},
 };

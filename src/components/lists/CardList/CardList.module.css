@@ -1,7 +1,6 @@
 .container {
     display: flex;
-    justify-content: space-evenly;
-    margin-left: 138px;
-    margin-right: 138px;
-    margin-top: 20px;
+    justify-content: flex-start;
+    margin-top: 40px;
+    gap: 15px;
 }

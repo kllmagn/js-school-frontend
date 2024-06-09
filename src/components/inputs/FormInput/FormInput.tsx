@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styles from "./FormInput.module.css";
 
 type FormInputProps = {
@@ -19,16 +20,16 @@ const FormInput = ({
 }: FormInputProps) => {
 	return (
 		<div className={styles.formInput}>
-			<label
-                htmlFor={label}
-            >{label}</label>
+			<label className={styles.label} htmlFor={label}>
+				{label}
+			</label>
 			<input
-                id={label}
+				id={label}
 				type={type}
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
 				placeholder={placeholder}
-				className={error ? styles.error : ""}
+				className={classNames(styles.input, error ? styles.error : "")}
 			/>
 		</div>
 	);

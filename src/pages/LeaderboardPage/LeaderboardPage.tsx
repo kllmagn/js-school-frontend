@@ -5,19 +5,17 @@ import trophy from "icons/trophy.png";
 
 export const Leaderboard = () => {
 	return (
-		<ViewBox name="Топ 10 пользователей">
-			<div className={styles.list}>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-				<LeaderboardElement></LeaderboardElement>
-			</div>
-		</ViewBox>
+        <div className={styles.list}>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+            <LeaderboardElement></LeaderboardElement>
+        </div>
 	);
-}
+};

@@ -1,16 +1,19 @@
 import React from "react";
 
-import styles from "./Label.module.css";
+import styles from "./Label.module.less";
 
 type LabelProps = {
-	text: String | React.ReactNode;
+	children: String | React.ReactNode;
 	secondaryText?: String | React.ReactNode;
+    stretch?: Boolean;
 };
 
-const Label = ({ text, secondaryText }: LabelProps) => {
+const Label = ({ children, secondaryText, stretch = false }: LabelProps) => {
 	return (
-		<div className={styles.labelContainer}>
-			<div className={styles.labelPrimary}>{text}</div>
+		<div className={styles.labelContainer} style={{
+            "width": stretch ? "100%" : "fit-content",
+        }}>
+			<div className={styles.labelPrimary}>{children}</div>
 			{secondaryText && (
 				<div className={styles.labelSecondary}>{secondaryText}</div>
 			)}

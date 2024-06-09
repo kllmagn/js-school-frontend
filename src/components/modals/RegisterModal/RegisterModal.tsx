@@ -47,24 +47,38 @@ const RegisterModal = ({ onChange }: RegisterModalProps) => {
 
 	return (
 		<Modal title="Регистрация" isOpen onClose={onChange}>
-            <div className={styles.containerForm}>
-                <form className={styles.formsModal} onSubmit={handleSubmit}>
-                    <FormInput label="Эл. почта" value={usernameValue} onChange={handleUsernameChange} type="text"/>
-                    <FormInput label="Пароль" value={passwordValue} onChange={handlePasswordChange} type="password"/>
-                    <Button mode="danger" stretched rounded type="submit" size="small">Зарегистрироваться</Button>
-                </form>
-                {warning && (
-                    <div className={styles.warningContainer}>
-                        <span className={styles.warning}>
-                            Имя пользователя может состоять только из латинских букв и цифр.
-                            Ваш пароль должен состоять минимум из 8 символов и 1 буквы
-                        </span>
-                    </div>
-                )}
-                <Button stretched rounded type="submit" size="small">Вход</Button>
-            </div>
+			<div className={styles.containerForm}>
+				<form className={styles.formsModal} onSubmit={handleSubmit}>
+					<FormInput
+						label="Эл. почта"
+						value={usernameValue}
+						onChange={handleUsernameChange}
+						type="text"
+					/>
+					<FormInput
+						label="Пароль"
+						value={passwordValue}
+						onChange={handlePasswordChange}
+						type="password"
+					/>
+					<Button mode="danger" stretched rounded type="submit" size="small">
+						Зарегистрироваться
+					</Button>
+				</form>
+				{warning && (
+					<div className={styles.warningContainer}>
+						<span className={styles.warning}>
+							Имя пользователя может состоять только из латинских букв и цифр.
+							Ваш пароль должен состоять минимум из 8 символов и 1 буквы
+						</span>
+					</div>
+				)}
+				<Button stretched rounded type="submit" size="small">
+					Вход
+				</Button>
+			</div>
 		</Modal>
 	);
-}
+};
 
 export default RegisterModal;

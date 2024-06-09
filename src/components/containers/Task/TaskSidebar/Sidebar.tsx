@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./sidebar.module.css";
-import { modalList } from "components/containers/Header/Profile/Profile";
 
 interface Props {
 	handleClickTheory: () => void;
 }
 
 function Sidebar({ handleClickTheory }: Props) {
-	if (!modalList) return null;
 	return (
 		<>
 			<div className={styles.sidebar} onClick={handleClickTheory}>

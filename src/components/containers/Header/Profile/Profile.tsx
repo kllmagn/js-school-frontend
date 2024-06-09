@@ -10,7 +10,7 @@ import AuthModal from "components/modals/AuthModal/AuthModal";
 import { useSelector } from "react-redux";
 import { accessTokenSelector } from "store/token/token.selector";
 import { useMeData } from "hooks/useMeData";
-export const modalList = document.getElementById("modalList");
+
 
 const Profile = () => {
 	const [userData] = useMeData();
@@ -30,8 +30,6 @@ const Profile = () => {
 	const handleClickAuthoriz = () => {
 		setModalAuthorizOpen(!isModalAuthorizOpen);
 	};
-
-	if (!modalList) return null;
 
 	return (
 		<div>
@@ -89,18 +87,8 @@ const Profile = () => {
 					</button>
 				</div>
 			)}
-			{createPortal(
-				isModalRegistOpen && (
-					<RegisterModal onChange={handleClickRegistration} />
-				),
-				modalList,
-			)}
-			{createPortal(
-				isModalAuthorizOpen && (
-					<AuthModal onChange={handleClickAuthoriz} />
-				),
-				modalList,
-			)}
+			{isModalRegistOpen && <RegisterModal onChange={handleClickRegistration} />}
+			{isModalAuthorizOpen && <AuthModal onChange={handleClickAuthoriz} />}
 		</div>
 	);
 };

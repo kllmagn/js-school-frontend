@@ -1,5 +1,8 @@
 import { CardList } from "components/lists/CardList/CardList";
 import styles from "./Level.module.css";
+import ViewBox from "../ViewBox/ViewBox";
+import Label from "components/base/Label";
+import Text from "components/base/Text";
 
 type LevelProps = {
 	id: number;
@@ -8,19 +11,18 @@ type LevelProps = {
 	order: number;
 };
 
-export const Level = ({ id, title, description, order }: LevelProps) => {
+const Level = ({ id, title, description, order }: LevelProps) => {
 	return (
-		<div className={styles.container}>
-			<div className={styles.background}>
-				<div className={styles.text}>
-					<div className={styles.levelText}>
-						<span className={styles.levelOrder}>Уровень {order}: </span>
-						<span className={styles.levelTitle}> {title}</span>
-					</div>
-					<span>{description}</span>
-					<CardList levelId={id} />
-				</div>
-			</div>
-		</div>
+		<ViewBox>
+            <div className={styles.levelContainer}>
+                <Label secondaryText={<Text font="gilroyLight" size="small">{title}</Text>}>
+                    <Text font="gilroyBold" size="small">Уровень {order}</Text> 
+                </Label>
+                <span className={styles.levelDescription}>{description}</span>
+                <CardList levelId={id} />
+            </div>
+        </ViewBox>
 	);
 };
+
+export default Level;

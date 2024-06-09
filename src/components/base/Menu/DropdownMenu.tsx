@@ -1,7 +1,7 @@
 import React from "react";
-import { To, useLinkClickHandler } from "react-router-dom";
+import { To } from "react-router-dom";
 
-import styles from "./DropdownMenu.module.css";
+import styles from "./DropdownMenu.module.less";
 
 export type MenuElementProps = {
 	text: String | React.ReactNode;

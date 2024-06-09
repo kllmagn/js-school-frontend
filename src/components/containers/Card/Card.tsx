@@ -11,6 +11,8 @@ type CategoryCardProps = {
 	title: string;
 	description: string;
 	number: number;
+    width?: string;
+    height?: string;
 };
 
 type CardProps = {
@@ -28,9 +30,13 @@ export function CategoryCard({
 	title,
 	description,
 	number,
+    width,
+    height,
 }: CategoryCardProps) {
 	return (
-		<div className={styles.card}>
+		<div className={styles.card} style={{
+            width, height,
+        }}>
 			<div className={styles.cardContent}>
 				<img alt="card-icon" src={icons[number]}></img>
 				<span className={styles.title}>{title}</span>

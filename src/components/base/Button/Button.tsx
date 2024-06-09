@@ -1,7 +1,6 @@
 import React from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.less"
 import classNames from "classnames";
-
 
 type ButtonProps = {
 	mode?: "primary" | "secondary" | "warning" | "danger";
@@ -11,14 +10,10 @@ type ButtonProps = {
 	rounded?: Boolean;
 	onClick?: () => void;
 	children: String | React.ReactNode;
-} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-
-const ButtonColors = {
-	primary: "#5AD77D",
-	secondary: "#515151",
-	warning: "orange",
-	danger: "crimson",
-};
+} & React.DetailedHTMLProps<
+	React.ButtonHTMLAttributes<HTMLButtonElement>,
+	HTMLButtonElement
+>;
 
 const Button = ({
 	mode = "primary",
@@ -28,25 +23,23 @@ const Button = ({
 	onClick,
 	children,
 	stretched = false,
-    ...rest
+	...rest
 }: ButtonProps) => {
 	return (
 		<button
 			className={classNames(
 				styles.base,
+                styles[mode],
 				outlined && styles.outlined,
 				styles[size],
 				rounded && styles.rounded,
 				stretched && styles.stretched,
 			)}
 			style={{
-				...({
-					"--button-main-color": ButtonColors[mode],
-				} as React.CSSProperties),
 				width: stretched ? "100%" : "auto",
 			}}
 			onClick={onClick}
-            {...rest}
+			{...rest}
 		>
 			{children}
 		</button>

@@ -59,19 +59,31 @@ const AuthModal = ({ onChange }: AuthModalProps) => {
 
 	return (
 		<Modal title="Вход" isOpen onClose={onChange}>
-            <div className={styles.containerForm}>
-                <form className={styles.formsModal} onSubmit={handleSubmit}>
-                    <FormInput label="Эл. почта" value={usernameValue} onChange={handleUsernameChange} type="text"/>
-                    <FormInput label="Пароль" value={passwordValue} onChange={handlePasswordChange} type="password"/>
-                    <Button rounded stretched type="submit" size="small">Войти</Button>
-                </form>
-                <div className={styles.gavnoContainer}>
-                    <span>Регистрация</span>
-                    <span className={styles.gavno}>Забыли пароль?</span>
-                </div>
-            </div>
-        </Modal>
+			<div className={styles.containerForm}>
+				<form className={styles.formsModal} onSubmit={handleSubmit}>
+					<FormInput
+						label="Логин"
+						value={usernameValue}
+						onChange={handleUsernameChange}
+						type="text"
+					/>
+					<FormInput
+						label="Пароль"
+						value={passwordValue}
+						onChange={handlePasswordChange}
+						type="password"
+					/>
+					<Button rounded stretched type="submit" size="small">
+						Войти
+					</Button>
+				</form>
+				<div className={styles.gavnoContainer}>
+					<span>Регистрация</span>
+					<span className={styles.gavno}>Забыли пароль?</span>
+				</div>
+			</div>
+		</Modal>
 	);
-}
+};
 
 export default AuthModal;

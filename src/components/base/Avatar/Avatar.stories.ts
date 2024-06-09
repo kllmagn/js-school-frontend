@@ -6,8 +6,8 @@ const meta: Meta<typeof Avatar> = {
 	component: Avatar,
 	argTypes: {
 		src: {
-            control: { type: "text" },
-        }
+			control: { type: "text" },
+		},
 	},
 };
 
@@ -15,6 +15,5 @@ export default meta;
 type Story = StoryObj<typeof Avatar>;
 
 export const Primary: Story = {
-	args: {
-	},
+	args: {},
 };
