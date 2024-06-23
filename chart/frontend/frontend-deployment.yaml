@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: js-school.cr.cloud.ru/js-school-frontend
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "400Mi"
+              cpu: "300m"
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: regcred
