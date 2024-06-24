@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SolutionStatus } from "../Task";
+import { formatPath } from "api/utils";
 import styles from "./GameWindow.module.less"
 import { ReactComponent as IconController } from "icons/controller.svg"
 import { AnimationPage } from "components/AnimationPage/AnimationPage";
@@ -26,7 +27,7 @@ const GameWindow = ({loading, solutionId, solutionStatus }: GameWindowProps) => 
                         className={styles.gameWindow}
                         title="game-window"
                         key={iframeKey}
-                        src={`http://localhost:8000/api/v1/solutions/${solutionId}/view`}
+                        src={formatPath(`/api/v1/solutions/${solutionId}/view`)}
                         frameBorder="0"
                         allowFullScreen
                         sandbox="allow-same-origin allow-scripts"

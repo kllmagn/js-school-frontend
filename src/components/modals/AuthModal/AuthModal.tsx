@@ -6,6 +6,7 @@ import { setTokenAccess, setTokenRefresh } from "store/token/token.slice";
 import Modal from "components/containers/Modal/Modal";
 import Button from "components/base/Button";
 import FormInput from "components/inputs/FormInput/FormInput";
+import { formatPath } from "api/utils";
 
 type AuthModalProps = {
 	onChange: () => void;
@@ -25,7 +26,7 @@ const AuthModal = ({ onChange }: AuthModalProps) => {
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch(
-			"http://localhost:8000/api/v1/profile/token/",
+			formatPath("/api/v1/profile/token/"),
 			{
 				method: "POST", // or 'PUT'
 				headers: {

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTokenAccess } from "store/token/token.slice";
 import ApiClient from "api/client";
 import { Dispatch } from "redux";
+import { formatPath } from "api/utils";
 
 export const refreshWrapper = (
 	dispatch: Dispatch,
@@ -22,7 +23,7 @@ export const refreshWrapper = (
 			return;
 		}
 		const responseRefresh = await fetch(
-			"http://localhost:8000/api/v1/auth/token/refresh/",
+			formatPath("/api/v1/auth/token/refresh/"),
 			{
 				method: "POST",
 				headers: {

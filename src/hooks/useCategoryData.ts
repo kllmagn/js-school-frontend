@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
 import ApiClient from "api/client";
+import { formatPath } from "api/utils";
 
 type Category = {
 	id: number;
@@ -25,7 +26,7 @@ export function useCategoryData(categoryId: number) {
     const [loading, setLoading] = useState<boolean>(true);
 	useEffect(() => {
         setLoading(true);
-		fetch(`http://localhost:8000/api/v1/categories/${categoryId}`, {
+		fetch(formatPath(`/api/v1/categories/${categoryId}`), {
 			method: "GET",
 			headers: {
 				accept: "application/json",

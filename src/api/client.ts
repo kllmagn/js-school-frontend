@@ -1,7 +1,9 @@
+import { formatPath } from "./utils";
+
 class ApiClient {
 	constructor(
 		public token: string,
-		public apiEndpoint = "http://localhost:8000/api/v1",
+		public apiEndpoint = formatPath("/api/v1"),
 	) {
 		this.apiEndpoint = apiEndpoint;
 		this.token = token;

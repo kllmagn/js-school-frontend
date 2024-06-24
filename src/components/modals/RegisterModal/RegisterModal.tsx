@@ -3,6 +3,7 @@ import styles from "./RegisterModal.module.css";
 import Modal from "components/containers/Modal/Modal";
 import Button from "components/base/Button";
 import FormInput from "components/inputs/FormInput/FormInput";
+import { formatPath } from "api/utils";
 
 type RegisterModalProps = {
 	onChange: () => void;
@@ -17,7 +18,7 @@ const RegisterModal = ({ onChange }: RegisterModalProps) => {
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch(
-			"http://localhost:8000/api/v1/profile/register/",
+			formatPath("/api/v1/profile/register/"),
 			{
 				method: "POST", // or 'PUT'
 				headers: {

@@ -10,6 +10,7 @@ import { setTokenAccess } from "store/token/token.slice";
 import Button from "components/base/Button";
 import DoubleViewBox from "components/containers/DoubleViewBox/DoubleViewBox";
 import FormInput from "components/inputs/FormInput/FormInput";
+import { formatPath } from "api/utils";
 
 export function ChangePasswordPage() {
 	const [newPasswordValue, setNewPasswordValue] = useState("");
@@ -23,7 +24,7 @@ export function ChangePasswordPage() {
     async function changePassword () {
       
         const response = await fetch(
-			"http://localhost:8000/api/v1/users/me/password/",
+			formatPath("/api/v1/users/me/password/"),
 			{
 				method: "POST", // or 'PUT'
 				headers: {
@@ -40,7 +41,7 @@ export function ChangePasswordPage() {
 		);
 		if (response.status === 401 && tokenAccess !== null) {
 			const responseRefresh = await fetch(
-				"http://localhost:8000/api/v1/profile/token/refresh/",
+				formatPath("/api/v1/profile/token/refresh/"),
 				{
 					method: "POST", // or 'PUT'
 					headers: {
