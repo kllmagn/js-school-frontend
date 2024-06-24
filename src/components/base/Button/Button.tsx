@@ -10,9 +10,11 @@ type ButtonProps = {
 	rounded?: Boolean;
 	onClick?: () => void;
 	children: String | React.ReactNode;
+    style?: {};
 } & React.DetailedHTMLProps<
 	React.ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement
+
 >;
 
 const Button = ({
@@ -23,6 +25,9 @@ const Button = ({
 	onClick,
 	children,
 	stretched = false,
+    style = {
+        width: stretched ? "100%" : "auto",
+    },
 	...rest
 }: ButtonProps) => {
 	return (
@@ -35,9 +40,7 @@ const Button = ({
 				rounded && styles.rounded,
 				stretched && styles.stretched,
 			)}
-			style={{
-				width: stretched ? "100%" : "auto",
-			}}
+			style={style}
 			onClick={onClick}
 			{...rest}
 		>

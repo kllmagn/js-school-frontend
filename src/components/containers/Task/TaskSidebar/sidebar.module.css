@@ -1,9 +1,10 @@
 
 .sidebar {
     position: relative;
-    width: 44px;
-    height: 100%;
-  
+    width: 35px;
+    height: 97%;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .sidebarInner {
@@ -12,20 +13,16 @@
     height: 100%;
     width: 100%;
     display:grid;
-    background-color: #515151;
-    
-    
-
-    
+    background-color: #ececec;
 }
 
 .titleSidebar {
-    font-family: "gilroy-bold", system-ui !important;
+    font-family: "gilroy-light", system-ui !important;
     display: block;
     align-self: center;
     white-space: nowrap;
     transform: rotate(-90deg);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin-right: 50%;
 }
 

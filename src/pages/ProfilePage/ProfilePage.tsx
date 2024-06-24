@@ -6,26 +6,20 @@ import { useMeData } from "hooks/useMeData";
 import { useState } from "react";
 import AvatarUpload from "components/inputs/AvatarUpload/AvatarUpload";
 import DoubleViewBox from "components/containers/DoubleViewBox/DoubleViewBox";
+import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { ProfileLeftPart } from "./ProfileLeftPart/ProfileLeftPart";
 
 export const ProfilePage = () => {
-	const [userData] = useMeData();
+	const [userData, loading] = useMeData();
 
 	const [imageSrc, setImageSrc] = useState(avatar);
-	return (
+	
+    return (
+        <>
+        {loading ? <AnimationPage/> :
         <DoubleViewBox
             left={
-                <>
-                    <div className={styles.avatarContainer}>
-                        <AvatarUpload backgroundSrc={imageSrc} />
-                    </div>
-
-                    <span
-                        className={styles.settings}
-                        onClick={useLinkClickHandler("/settings")}
-                    >
-                        Настройки
-                    </span>
-                </>
+               <ProfileLeftPart></ProfileLeftPart>
             }
             right={
                 <>
@@ -44,5 +38,6 @@ export const ProfilePage = () => {
                 </>
             }
         />
-	);
+}</>
+        );
 };

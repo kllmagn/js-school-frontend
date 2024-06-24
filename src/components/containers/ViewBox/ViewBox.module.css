@@ -2,6 +2,8 @@
     background: linear-gradient(183.02deg, rgba(224, 224, 224, 0.5) 2.51%, rgba(113, 131, 118, 0.135) 46.45%);
     padding: 25px;
     border-radius: 16px;
+    padding-bottom: 4%;
+    margin: 50px;
 }
 
 .viewBoxContainer:not(:first-child) {

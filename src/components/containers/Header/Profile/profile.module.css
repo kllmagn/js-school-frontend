@@ -1,23 +1,32 @@
 .user {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 0px 20px;
     height: 100%;
-    user-select: none;
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content:flex-start;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6%;
 }
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
 
 .avatar {
     border-radius: 50%;
-    background-color: #FFFDFD;
+    background-color: #686868;
     width: 45px;
     height: 45px;
 }
 
-.user:hover .userClicked {
-    background: #fffdfd48;
+.user:hover {
     transition-duration: 0.15s;
     transition-timing-function: linear;
 }
@@ -30,23 +39,32 @@
 }
 
 .logButton { 
+    font-size: 16px;
+    font-family: "codec-pro", system-ui;
     position: relative;
     display: flex;
-    
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-
     background-color: transparent;
     border: none; 
     outline: none; 
+    gap: 13px;
 }
 
 .hidden {
-    opacity: 0;
+    opacity: 1;
 }
 
 .user:hover .hidden {
     opacity: 1;
+}
+
+.logButton:hover {
+    color:#4CAF50;
+    cursor: pointer;
+}
+
+.profileContainer {
+    margin-left: auto;
 }
 

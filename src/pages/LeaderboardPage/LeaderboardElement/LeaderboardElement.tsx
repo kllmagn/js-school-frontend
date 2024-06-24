@@ -1,13 +1,21 @@
 import styles from "./leaderboardelement.module.css";
-import avatar from "./dickinglass.png";
-export function LeaderboardElement() {
+import avatarDefault from "./dickinglass.png";
+import { Leaderboard } from "hooks/useLeaderboardData";
+
+
+
+
+
+
+export function LeaderboardElement({id, username, solutions, solutions_total, avatar=avatarDefault, rank, rank_position}: Leaderboard) {
+    console.log(avatar);
 	return (
 		<div className={styles.layout}>
 			<div className={styles.container}>
 				<img alt="avatar" className={styles.avatar} src={avatar}></img>
-				<span>ХуйВОчках2020</span>
-				<span>место в рейтинге - 1</span>
-				<span>очки - 2302</span>
+				<span>{username}</span>
+				<span>место в рейтинге - {rank_position}</span>
+				<span>очки - {rank}</span>
 			</div>
 		</div>
 	);

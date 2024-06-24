@@ -34,6 +34,7 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
+    stroke: #000000;
 }
   
 .modalHeader {
@@ -61,4 +62,11 @@
   
 .modalHeader button:hover {
     color: #343a40;
+}
+
+
+.closeButton:hover {
+
+    stroke: #5AD77D !important;
+    transform: scale(1.20);
 }

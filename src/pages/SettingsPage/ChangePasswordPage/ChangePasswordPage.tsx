@@ -8,6 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setTokenAccess } from "store/token/token.slice";
 import Button from "components/base/Button";
+import DoubleViewBox from "components/containers/DoubleViewBox/DoubleViewBox";
+import FormInput from "components/inputs/FormInput/FormInput";
 
 export function ChangePasswordPage() {
 	const [newPasswordValue, setNewPasswordValue] = useState("");
@@ -16,10 +18,12 @@ export function ChangePasswordPage() {
 	const tokenAccess = useSelector(accessTokenSelector);
 	const tokenRefresh = useSelector(refreshTokenSelector);
 	const dispatch = useDispatch();
-	async function handleSubmit(event: FormEvent) {
-		event.preventDefault();
-		const response = await fetch(
-			"http://localhost:8000/api/v1/profile/password/",
+    const [warning, setWarning] = useState("");
+
+    async function changePassword () {
+      
+        const response = await fetch(
+			"http://localhost:8000/api/v1/users/me/password/",
 			{
 				method: "POST", // or 'PUT'
 				headers: {
@@ -52,59 +56,84 @@ export function ChangePasswordPage() {
 			let data: string = JSON.parse(await responseRefresh.text());
 			dispatch(setTokenAccess(data));
 		}
-	}
+        if (response.status === 400 && tokenAccess !== null) {
+            setWarning('Ваш пароль не совпадает со старым или введен неверный формат данных: пароль должен состоять из минимум 1 буквы или цифры, одной буквы заглавной или маленькой и общей длиной минимум 8 символов')
+        }
 
-	function handleNewPasswordChange(event: ChangeEvent<HTMLInputElement>) {
-		setNewPasswordValue(event.target.value);
-	}
+    };
+	 
+    
+    function handleSubmit(event: FormEvent) {
+		event.preventDefault();
+        if((passwordValue === "") || (newPasswordValue === "")|| (passwordConfirmation === "")) {
+            setWarning('Необходимо заполнить все поля');
+            console.log(warning);
+        }
+        else if (passwordConfirmation !== newPasswordValue) {
+            setWarning('Новый пароль не совпадает с повторным');
+            console.log(warning);
+        }
+        else if ((newPasswordValue === passwordValue) && (newPasswordValue !== "") ){
+            setWarning('Старый пароль совпадает с новым');
+            console.log(warning);
+        }
+        else {
+            changePassword();
+            console.log(warning);
+        }
+		
+	};
 
-	function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-		setPasswordChange(event.target.value);
-	}
-
-	function handlePasswordConfirmation(event: ChangeEvent<HTMLInputElement>) {
-		setPasswordConfirmation(event.target.value);
-	}
+   
 
 	return (
-		<div className={styles.container}>
-			<div></div>
-			<div className={styles.layoutLeft}>
+        <DoubleViewBox 
+        left={
+            <div className={styles.leftContent}>
 				<span onClick={useLinkClickHandler("/settings")}>
 					Редактирование профиля
 				</span>
 				<span className={styles.selected}>Изменить пароль</span>
 				<span onClick={useLinkClickHandler("/changeMail")}>Изменить почту</span>
 			</div>
-			<div className={styles.layoutRight}>
-				<span className={styles.mainHeader}>Изменить пароль</span>
+        }
+		right={<div className={styles.rightContent}>
+        <span className={styles.mainHeader}>Изменить пароль</span>
+        <form onSubmit={handleSubmit} className={styles.mainContent}>
+                <FormInput
+                    label="Текущий пароль"
+                    type="password"
+                    placeholder="Введите пароль"
+                    value={passwordValue}
+                    onChange={(value) => setPasswordChange(value)}
+                    
+                />
+                 <FormInput
+                    label="Новый пароль"
+                    type="password"
+                    placeholder="Введите пароль"
+                    value={newPasswordValue}
+                    onChange={(value) => setNewPasswordValue(value)}
+                />
 
-				<form onSubmit={handleSubmit} className={styles.form}>
-					<div className={styles.mainContent}>
-						<span>текущий пароль</span>
-						<input
-							className={styles.inputName}
-							value={passwordValue}
-							onChange={handlePasswordChange}
-						></input>
-						<span>новый пароль</span>
-						<input
-							className={styles.inputName}
-							value={newPasswordValue}
-							onChange={handleNewPasswordChange}
-						></input>
-						<span>повторите пароль</span>
-						<input
-							className={styles.inputName}
-							value={passwordConfirmation}
-							onChange={handlePasswordConfirmation}
-						></input>
-						<Button outlined rounded>
-							Сохранить изменения
-						</Button>
-					</div>
-				</form>
-			</div>
-		</div>
+                <FormInput
+                    label="Повторите пароль"
+                    type="password"
+                    placeholder="Введите пароль"
+                    value={passwordConfirmation}
+                    onChange={(value) => setPasswordConfirmation(value)}
+                />
+                {!(warning === '') && <a className={styles.warning}>{warning}</a>}
+
+
+                <Button outlined rounded style={{width: '20%', fontSize:'16px', height:'40px'}}>
+							Сохранить изменения 
+                </Button>
+                
+        </form>
+    </div>}
+			
+			
+        />
 	);
 }

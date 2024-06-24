@@ -17,12 +17,12 @@ export const refreshWrapper = (
 		return;
 	}
 	if (accessToken === null) return;
-	new ApiClient(accessToken).get("/profile/me").then(async (response) => {
+	new ApiClient(accessToken).get("/users/me").then(async (response) => {
 		if (response.status !== 401) {
 			return;
 		}
 		const responseRefresh = await fetch(
-			"http://localhost:8000/api/v1/profile/token/refresh/",
+			"http://localhost:8000/api/v1/auth/token/refresh/",
 			{
 				method: "POST",
 				headers: {

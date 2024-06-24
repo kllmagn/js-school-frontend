@@ -1,7 +1,7 @@
 .layout {
     width: 70%;
     background-color: white;
-    height: 8%;
+    height: 70px;
     border-radius: 16px;
 }
 
@@ -15,6 +15,7 @@
     justify-content:flex-start;
     gap: 10%;
     padding-left: 5%;
+    font-size: 16px;
 
 }
 
@@ -24,5 +25,8 @@
 
 .layout:hover {
     cursor: pointer;
-    background-color: #F2EEEE;
+    background-color: #6b6b6b;
+    color: white;
+    transition: 0.3s ease-in-out;
+
 }

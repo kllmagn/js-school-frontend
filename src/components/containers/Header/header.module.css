@@ -5,10 +5,12 @@
     height: 3.5rem;
     font-family: "codec-pro", system-ui;
     background: 0;
-    padding-top: 5px;
+    padding: 0 50px;
+    padding-top: 15px;
     display: flex;
     align-items: center;
-    gap: 10%;
+    gap: 7%;
+    box-sizing: border-box;
 }
 
 .logoContainer {
@@ -35,12 +37,11 @@
 }
 
 .menuContainer {
-    width: 60%;
+    width: 40%;
     height: 100%;
     display: flex;
-    position: relative;
     align-items: center;
-    justify-content:flex-start;
+    justify-content: flex-start;
     gap: 4%;
     margin-left: 6%;
 }
@@ -50,7 +51,7 @@
     justify-content: center;
     position: relative;
     display: flex;
-    gap: 5%;
+    gap: 9%;
 }
 
 .icon {
@@ -59,6 +60,7 @@
     height: 25px;
     margin: 0;
     padding: 0;
+    
 }
 
 .menu a:hover {
@@ -66,8 +68,8 @@
     cursor: pointer;
 }
 
-.logo :hover {
-    color: #000000;
+.logoContainer :hover {
+    color: #5AD77D;
     transform: scale(1.02);
     cursor: pointer;
 }
@@ -76,7 +78,7 @@
     stroke:  #5AD77D !important; 
 }
 
-.menuContainer a:hover {
+.menuContainer span:hover {
     color: #5AD77D;
     cursor: pointer;
 }

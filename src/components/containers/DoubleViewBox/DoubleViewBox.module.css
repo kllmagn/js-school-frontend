@@ -1,27 +1,26 @@
 .doubleViewBoxContainer {
     display: flex;
-    flex-direction: row;
     height: 100%;
-    width: 100%;
-    gap: 20px;
+    width: 90%;
+    background: #f5f5f5;
+    border-radius: 16px;
+    margin: auto;
+    margin-top: 3%;
     align-items: flex-start;
 }
 
 .viewBoxLeft {
     display: flex;
     flex-direction: column;
-    height: auto;
-    width: auto;
-    padding: 5px 15px;
-    background: #f5f5f5;
-    border-radius: 16px;
+    height: 100%;
+    width: 18%;
+   
 }
 
 .viewBoxRight {
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 5px 15px;
-    background-color: #f5f5f5;
-    border-radius: 16px;
+    height: 100%;
+    width: 70%;
 }

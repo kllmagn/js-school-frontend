@@ -66,19 +66,21 @@ const AuthModal = ({ onChange }: AuthModalProps) => {
 						value={usernameValue}
 						onChange={handleUsernameChange}
 						type="text"
+                        style={{width:'90%', alignSelf:'center'}}
 					/>
 					<FormInput
 						label="Пароль"
 						value={passwordValue}
 						onChange={handlePasswordChange}
 						type="password"
+                        style={{width:'90%', alignSelf:'center'}}
 					/>
-					<Button rounded stretched type="submit" size="small">
+					<Button rounded stretched type="submit" size="small" style={{width: '95%', alignSelf:'center'}}>
 						Войти
 					</Button>
 				</form>
 				<div className={styles.gavnoContainer}>
-					<span>Регистрация</span>
+					<span className={styles.gavno}>Регистрация</span>
 					<span className={styles.gavno}>Забыли пароль?</span>
 				</div>
 			</div>

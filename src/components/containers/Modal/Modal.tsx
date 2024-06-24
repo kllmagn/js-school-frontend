@@ -15,8 +15,8 @@ const Modal = ({ title, isOpen = false, onClose, children }: ModalProps) => {
 	return (
 		<div className={styles.modalContainer}>
 			<div className={styles.modal}>
-                <button className={styles.closeButton} onClick={onClose}>
-					<IconClose height="100%" width="100%"/>
+                <button onClick={onClose} className={styles.closeButton}>
+					<IconClose  height="80%" width="80%"/>
 				</button>
 				<div className={styles.modalHeader}>
 					{title && <Text font="gilroyBold">{title}</Text>}

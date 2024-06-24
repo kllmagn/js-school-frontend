@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./Task.module.css";
+import styles from "./Task.module.less";
 import { TheorySidebar } from "components/modals/TheorySidebar/TheorySidebar";
 import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
 import { useLocation } from "react-router-dom";
@@ -14,6 +14,7 @@ import { refreshWrapper, useRefreshWrapper } from "hooks/useRefreshWrapper";
 import GameWindow from "./TaskGameWindow/GameWindow";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshTokenSelector } from "store/token/token.selector";
+import { AnimationPage } from "components/AnimationPage/AnimationPage";
 
 export enum SolutionStatus {
 	CREATED = "created",
@@ -86,16 +87,17 @@ export function Task() {
 	const { taskGroup } = state;
 	const { id, title, description } = taskGroup as TaskGroup;
 	const taskGroupId = String(id);
-	const [stepsList] = useTask(taskGroupId); // повторяется в steps вызов
+	const [stepsList, loading] = useTask(taskGroupId); // повторяется в steps вызов
 	const [activeSubTaskIdx, setActiveSubTaskIdx] = useState(0);
 	const activeSubTask = stepsList[activeSubTaskIdx] || null;
-	const [activeSubTaskStatus, setActiveSubTaskStatus] =
-		useState<SolutionStatus | null>(null);
+	const [activeSubTaskStatus, setActiveSubTaskStatus] = useState<SolutionStatus | null>(null);
 	const [isTheoryOpen, setTheoryOpen] = useState(false);
 	const code = stepsList[activeSubTaskIdx]?.template?.content ?? null;
 	const [codeAreas, setCodeAreas] = useState<CodeArea[]>([]);
 	const [codeValue, setCodeValue] = useState(code || "");
 	const [solutionId, setSolutionId] = useState<number | null>(null);
+    const [loadingGame, setLoadingGame] = useState(false);
+
 
 	const dispatch = useDispatch();
 
@@ -109,7 +111,9 @@ export function Task() {
 	}, [accessToken]);
 
 	const handleSubmitSolution = useCallback(() => {
+        setLoadingGame(true);
 		if (accessToken === null || codeAreas.length === 0) return;
+        
 		// create solutionData object from codeAreas, key - areaId, value - code
 		let solutionData: { [areaId: string]: string } = {};
 		for (const area of codeAreas) {
@@ -155,6 +159,7 @@ export function Task() {
 			.get(`/solutions/${solutionId}`)
 			.then(async (response) => {
 				if (response.status !== 200) return;
+                setLoadingGame(false);
 				const responseData = await response.json();
 				setActiveSubTaskStatus(responseData.status_verbose);
 			});
@@ -170,16 +175,17 @@ export function Task() {
 			setActiveSubTaskStatus(null);
 		}
 	}, [activeSubTaskStatus, activeSubTaskIdx, stepsList.length]);
-
+   
 	return (
 		<div className={styles.taskContainer}>
-			{isTheoryOpen && (
+            {isTheoryOpen && (
 				<TheorySidebar
 					handleClickTheory={handleClickTheory}
 					description={description}
 					title={title}
 				/>
 			)}
+           
 			<div className={styles.taskContainerInner}>
 				<div className={styles.taskLayout}>
 					<Sidebar handleClickTheory={handleClickTheory} />
@@ -210,6 +216,7 @@ export function Task() {
 					</div>
 					<div className={styles.rightPart}>
 						<GameWindow
+                            loading={loadingGame}
 							solutionId={solutionId}
 							solutionStatus={activeSubTaskStatus}
 						/>
@@ -223,6 +230,7 @@ export function Task() {
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	);
 }

@@ -1,25 +1,29 @@
 .taskContainer {
-    position: relative;
     display: flex;
     height: 100%;
     min-height: 680px;
     max-height: 1000px;
-    margin-top: 2%;
+    background-color: @background-color-main;
 }
 
 .taskContainerInner {
+    height: 100%;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 1365px;
-    margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0,0,0,.1);
+    box-shadow: 0;
 }
 
 .taskLayout {
-    position: relative;
     display: flex;
-   
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
     height: 100%;
     font-size: 14px;
 }
@@ -28,8 +32,6 @@
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-
-    position: relative;
     width: 50%;
     min-width: 361px;
     border-right-width: 1px;
@@ -40,10 +42,16 @@
 }
 
 .leftPart {
-    height: 100%;
-    width: 50%;
+    border-radius: 16px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
+    flex: 1;
 }
 
 .rightPart {
-   width: 49.9%;
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
 }

@@ -1,0 +1,13 @@
+.avatarContainer {
+    align-self: center;
+    margin-top: 20%;
+}
+
+.settings {
+    color: black;
+    align-self: center;
+    font-size: 18px;
+    margin-top: 10%;
+    font-weight: lighter;
+    cursor: pointer;
+}

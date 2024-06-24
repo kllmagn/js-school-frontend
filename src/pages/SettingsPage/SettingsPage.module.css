@@ -4,15 +4,39 @@
     background-color: #DFDCF1;
 }
 
+.leftContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+    gap: 3%;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 18px;
+}
+
 .selected {
     text-align: center;
     width: 90%;
-    background-color: #515151;
-    color: white !important;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0) !important;
     padding: 2%;
     border-radius: 16px;
 }
 
+.rightContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    gap: 3%;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 18px;
+    margin-left: 5%;
+}
 
 .mainHeader {
     font-size: 32px !important;
@@ -46,6 +70,7 @@
 }
 
 .mainContent {
+    margin-left: 1%;
     height: 100%;
     width: 100%;
     display: flex;
@@ -77,4 +102,12 @@
 
 .layoutLeft a:hover{
     color: #5265f6; 
+}
+
+
+.warning {
+    color: red;
+    width: 80%;
+    height: auto;
+    padding-bottom: 2%;
 }

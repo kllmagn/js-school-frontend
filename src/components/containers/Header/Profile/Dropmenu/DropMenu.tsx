@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DropMenu.module.css";
 
 import { ReactComponent as IcoProfile } from "icons/profile.svg";
@@ -8,41 +8,64 @@ import { useLinkClickHandler, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setTokenAccess, setTokenRefresh } from "store/token/token.slice";
 
-interface props {
-	handleMouseEnter: () => void;
-}
+import avatar from "icons/placeholder.png";
+import icoArrow from "icons/arrow.svg";
+import { useMeData } from "hooks/useMeData";
+import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { createPortal } from "react-dom";
 
-export function DropMenu({ handleMouseEnter }: props) {
+
+export function DropMenu() {
+    const container = document.getElementById('root');
 	const navigate = useNavigate();
 
 	const handleExitButton = () => {
 		dispatch(setTokenAccess(null));
 		dispatch(setTokenRefresh(null));
 		navigate("/");
-		//window.location.reload();
 	};
 
 	const dispatch = useDispatch();
+    const [userData, loading] = useMeData();
+    const [show, setShow] = useState<Boolean>(false);
+    const handleMouseOver = () => {
+        setShow(true);
+    };
+    const handleMouseOut = () => {
+        setShow(false);
+    };
+    const profileClickHandler = useLinkClickHandler<HTMLDivElement>("/profile");
+    const settingsClickHandler = useLinkClickHandler<HTMLDivElement>("/settings");
+    console.log("showDebug", show);
 	return (
-		<div className={styles.dropdown} onMouseLeave={handleMouseEnter}>
-			<div
-				className={styles.dropdownContent}
-				onClick={useLinkClickHandler("/profile")}
-			>
-				<IcoProfile />
-				<span>Профиль</span>
-			</div>
-			<div
-				className={styles.dropdownContent}
-				onClick={useLinkClickHandler("/settings")}
-			>
-				<IcoSettings />
-				<span>Настройки</span>
-			</div>
-			<div className={styles.dropdownContent} onClick={handleExitButton}>
-				<IcoExit />
-				<span>Выйти</span>
-			</div>
-		</div>
+        <>
+        {container && (loading ? createPortal(<AnimationPage></AnimationPage>, container) : <div className={styles.dropdown} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+<button  className={styles.dropbtn}>
+    <img alt="avatar" className={styles.avatar} src={avatar}></img>
+    <span> {userData ? userData.username : "Лунтик"} </span>
+    <img alt="arrow" className={styles.arrowClicked} src={icoArrow} />
+</button>
+{
+    show &&
+    <div className={styles.dropdownContentWrapper}>
+        <div className={styles.dropdownContent}>
+            <div className={styles.dropdownContentElement} onClick={profileClickHandler}>
+                <IcoProfile />
+                <span>Профиль</span>
+            </div>
+            <div className={styles.dropdownContentElement} onClick={settingsClickHandler}>
+                <IcoSettings />
+                <span>Настройки</span>
+            </div>
+            <div className={styles.dropdownContentElement} onClick={handleExitButton}>
+                <IcoExit />
+                <span>Выйти</span>
+            </div>
+        </div>
+    </div>
+}
+</div>)}</>
 	);
 }
+
+

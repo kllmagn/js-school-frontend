@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Header.module.css";
+import styles from "./header.module.css";
 import Profile from "./Profile/Profile";
 import { useLinkClickHandler } from "react-router-dom";
 import {ReactComponent as IconLogo} from "icons/logo.svg"
