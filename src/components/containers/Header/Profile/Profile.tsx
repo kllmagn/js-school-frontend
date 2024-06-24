@@ -29,7 +29,7 @@ const Profile = () => {
 
 	return (
 		<div className={styles.profileContainer}>
-			{tokenAccess &&  <DropMenu/>}
+			{tokenAccess &&  <DropMenu avatar={userData?.avatar}/>}
 
 			{!tokenAccess && (
 				<div className={userClass}>

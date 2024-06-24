@@ -21,7 +21,7 @@ export type Leaderboard = {
 
 
 
-type LeaderboardDetail = {
+export type LeaderboardDetail = {
 	detail: string;
 };
 

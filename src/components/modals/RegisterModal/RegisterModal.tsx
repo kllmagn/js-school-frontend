@@ -18,7 +18,7 @@ const RegisterModal = ({ onChange }: RegisterModalProps) => {
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch(
-			formatPath("/api/v1/profile/register/"),
+			formatPath("/api/v1/auth/register/"),
 			{
 				method: "POST", // or 'PUT'
 				headers: {

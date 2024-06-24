@@ -4,15 +4,18 @@ import styles from "./ProfileLeftPart.module.css";
 import { useLinkClickHandler } from "react-router-dom";
 import { useState } from "react";
 import avatar from "icons/placeholder.png";
+import { useMeData } from "hooks/useMeData";
 
 export const ProfileLeftPart = () => {
-    const [imageSrc, setImageSrc] = useState(avatar);
+    const [data] = useMeData();
+
+    
     
     
     return (
         <>
         <div className={styles.avatarContainer}>
-            <AvatarUpload backgroundSrc={imageSrc} />
+            <AvatarUpload backgroundSrc={data?.avatar} />
         </div>
 
         <span

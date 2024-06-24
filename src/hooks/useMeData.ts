@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useRefreshWrapper } from "./useRefreshWrapper";
 import ApiClient from "api/client";
 
-type User = {
-	id: number;
+export type User = {
+	id: number; 
 	username: string;
-	solutions: string;
-	solutions_total: number;
+	solutions?: string;
+	solutions_total?: string;
+	avatar?: string;
+	rank?: string;
+    rank_position: number;
 };
+
 
 type UserDetail = {
 	detail: string;

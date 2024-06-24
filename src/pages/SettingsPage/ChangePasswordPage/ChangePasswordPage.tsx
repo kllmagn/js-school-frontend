@@ -41,7 +41,7 @@ export function ChangePasswordPage() {
 		);
 		if (response.status === 401 && tokenAccess !== null) {
 			const responseRefresh = await fetch(
-				formatPath("/api/v1/profile/token/refresh/"),
+				formatPath("/api/v1/auth/token/refresh/"),
 				{
 					method: "POST", // or 'PUT'
 					headers: {

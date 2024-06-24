@@ -26,12 +26,13 @@ const AuthModal = ({ onChange }: AuthModalProps) => {
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch(
-			formatPath("/api/v1/profile/token/"),
+			formatPath("/api/v1/auth/token/"),
 			{
 				method: "POST", // or 'PUT'
 				headers: {
 					accept: "application/json",
 					"Content-Type": "application/json",
+                    
 				},
 				body: JSON.stringify({
 					username: usernameValue,

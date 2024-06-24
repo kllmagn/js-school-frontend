@@ -8,6 +8,7 @@ export function SearchPage() {
 	const [showResults, setShowResults] = useState(false);
 	const handleSearch = () => {
 		setShowResults(true);
+        
 	};
 	return (
         <div className={styles.list}>

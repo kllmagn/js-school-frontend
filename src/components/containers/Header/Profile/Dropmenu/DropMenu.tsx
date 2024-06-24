@@ -8,14 +8,17 @@ import { useLinkClickHandler, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setTokenAccess, setTokenRefresh } from "store/token/token.slice";
 
-import avatar from "icons/placeholder.png";
+import avatarDefault from "icons/placeholder.png";
 import icoArrow from "icons/arrow.svg";
 import { useMeData } from "hooks/useMeData";
 import { AnimationPage } from "components/AnimationPage/AnimationPage";
 import { createPortal } from "react-dom";
 
+type DropMenu = {
+    avatar: string | undefined;
+}
 
-export function DropMenu() {
+export function DropMenu({avatar = avatarDefault}:DropMenu ) {
     const container = document.getElementById('root');
 	const navigate = useNavigate();
 

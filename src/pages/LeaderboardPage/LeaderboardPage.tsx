@@ -10,6 +10,7 @@ export const Leaderboard = () => {
     const [data, loading] = useLeaderboardData();
 	return (
         <div className={styles.list}>
+            <span className={styles.mainTopic}>Топ 10 пользователей <img className={styles.trophy} src={trophy}/></span>
             {loading ? <AnimationPage/> : (data.map((category, index) => (
 				<LeaderboardElement
 					key={category.id}
