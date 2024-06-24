@@ -1,5 +1,5 @@
-const HOST = process.env.HOST || null;
+const BACKEND_HOST = process.env.BACKEND_HOST || null;
 
 export const formatPath = (path: string) => {
-    return `${HOST ? "http://" : ""}${HOST || ""}${path}`
+    return `${BACKEND_HOST ? "http://" : ""}${BACKEND_HOST || ""}${path}`
 }

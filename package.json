@@ -34,9 +34,9 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "react-app-rewired start",
+		"start": "BACKEND_HOST=localhost:8000 react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test",
+		"test": "BACKEND_HOST=localhost:8000 react-app-rewired test",
 		"eject": "react-scripts eject",
 		"pretty": "prettier --tab-width 2 --use-tabs --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
 		"storybook": "storybook dev -p 6006",
