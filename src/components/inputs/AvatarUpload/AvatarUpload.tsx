@@ -7,6 +7,7 @@ import { url } from "inspector";
 import { useChangeAvatar } from "hooks/useChangeAvatar";
 import { LeaderboardDetail } from "hooks/useLeaderboardData";
 import { useRefreshWrapper } from "hooks/useRefreshWrapper";
+import { formatPath } from "api/utils";
 
 type AvatarUploadProps = {
 	text?: string;
@@ -15,47 +16,47 @@ type AvatarUploadProps = {
 };
 
 export type UploadProps = {
-    onUpload: (data: unknown) => void;
-  }
+	onUpload: (data: unknown) => void;
+};
 
 const AvatarUpload = ({
 	text = "Выберите аватар",
 	backgroundSrc,
 	size = "medium",
 }: AvatarUploadProps) => {
-    const [accessToken] = useRefreshWrapper();
+	const [accessToken] = useRefreshWrapper();
 
-    const handleFile = (file: File) => {
-        console.log(`avatar=@${file.name};type=${file.type}`);
-        fetch(`http://localhost:8000/api/v1/users/me`, {
+	const handleFile = (file: File) => {
+		const data: { [key: string]: string | File } = {
+			avatar: file,
+		};
+		const formData = new FormData();
+		for (const name in data) {
+			formData.append(name, data[name]);
+		}
+		fetch(formatPath(`/api/v1/users/me`), {
 			method: "PUT",
 			headers: {
 				accept: "application/json",
-				"Content-Type": "multipart/form-data",
 				Authorization: `Bearer ${accessToken}`,
 			},
-            body: JSON.stringify({
-                username: 'admin',
-                avatar: `avatar=@${file.name};type=${file.type}`,
-            }),
+			body: formData,
 		}).then(async (response) => {
 			const text = await response.text();
 			if (response.status === 200) {
-                console.log(response.status);
+				console.log(response.status);
 			} else {
 				let responseData: LeaderboardDetail = JSON.parse(text);
 				console.log(responseData.detail);
 			}
-		})
-    };
+		});
+	};
 
-        
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (!event.target.files) return;
-        handleFile(event.target.files[0]);
-    };
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (!event.target.files) return;
+		handleFile(event.target.files[0]);
+	};
 
-    
 	return (
 		<div
 			className={styles.avatarUpload}
@@ -73,7 +74,12 @@ const AvatarUpload = ({
 			<label htmlFor="avatar-upload" className={styles.inputFile}>
 				{text}
 			</label>
-			<input id="avatar-upload" type="file" accept="image/*" onChange={handleFileChange}/>
+			<input
+				id="avatar-upload"
+				type="file"
+				accept="image/*"
+				onChange={handleFileChange}
+			/>
 		</div>
 	);
 };

@@ -8,16 +8,11 @@ export function TaskList() {
 	const { cardId } = useParams();
 	const [taskList] = useTaskGroupsData(cardId);
 	return (
-
-            <div className={styles.list}>
-                <span className={styles.mainTopic}>Знакомство</span>
-                {taskList.map((taskgroup, index) => (
-                    <TaskListElement taskGroup={taskgroup} idx={index + 1} />
-                    
-                ))}
-          
-
-            </div>
-
+		<div className={styles.list}>
+			<span className={styles.mainTopic}>Знакомство</span>
+			{taskList.map((taskgroup, index) => (
+				<TaskListElement taskGroup={taskgroup} idx={index + 1} />
+			))}
+		</div>
 	);
 }

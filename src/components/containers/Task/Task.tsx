@@ -90,14 +90,14 @@ export function Task() {
 	const [stepsList, loading] = useTask(taskGroupId); // повторяется в steps вызов
 	const [activeSubTaskIdx, setActiveSubTaskIdx] = useState(0);
 	const activeSubTask = stepsList[activeSubTaskIdx] || null;
-	const [activeSubTaskStatus, setActiveSubTaskStatus] = useState<SolutionStatus | null>(null);
+	const [activeSubTaskStatus, setActiveSubTaskStatus] =
+		useState<SolutionStatus | null>(null);
 	const [isTheoryOpen, setTheoryOpen] = useState(false);
 	const code = stepsList[activeSubTaskIdx]?.template?.content ?? null;
 	const [codeAreas, setCodeAreas] = useState<CodeArea[]>([]);
 	const [codeValue, setCodeValue] = useState(code || "");
 	const [solutionId, setSolutionId] = useState<number | null>(null);
-    const [loadingGame, setLoadingGame] = useState(false);
-
+	const [loadingGame, setLoadingGame] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -111,9 +111,9 @@ export function Task() {
 	}, [accessToken]);
 
 	const handleSubmitSolution = useCallback(() => {
-        setLoadingGame(true);
+		setLoadingGame(true);
 		if (accessToken === null || codeAreas.length === 0) return;
-        
+
 		// create solutionData object from codeAreas, key - areaId, value - code
 		let solutionData: { [areaId: string]: string } = {};
 		for (const area of codeAreas) {
@@ -159,7 +159,7 @@ export function Task() {
 			.get(`/solutions/${solutionId}`)
 			.then(async (response) => {
 				if (response.status !== 200) return;
-                setLoadingGame(false);
+				setLoadingGame(false);
 				const responseData = await response.json();
 				setActiveSubTaskStatus(responseData.status_verbose);
 			});
@@ -175,17 +175,17 @@ export function Task() {
 			setActiveSubTaskStatus(null);
 		}
 	}, [activeSubTaskStatus, activeSubTaskIdx, stepsList.length]);
-   
+
 	return (
 		<div className={styles.taskContainer}>
-            {isTheoryOpen && (
+			{isTheoryOpen && (
 				<TheorySidebar
 					handleClickTheory={handleClickTheory}
 					description={description}
 					title={title}
 				/>
 			)}
-           
+
 			<div className={styles.taskContainerInner}>
 				<div className={styles.taskLayout}>
 					<Sidebar handleClickTheory={handleClickTheory} />
@@ -216,7 +216,7 @@ export function Task() {
 					</div>
 					<div className={styles.rightPart}>
 						<GameWindow
-                            loading={loadingGame}
+							loading={loadingGame}
 							solutionId={solutionId}
 							solutionStatus={activeSubTaskStatus}
 						/>
@@ -230,7 +230,6 @@ export function Task() {
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	);
 }

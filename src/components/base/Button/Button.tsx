@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Button.module.less"
+import styles from "./Button.module.less";
 import classNames from "classnames";
 
 type ButtonProps = {
@@ -10,11 +10,10 @@ type ButtonProps = {
 	rounded?: Boolean;
 	onClick?: () => void;
 	children: String | React.ReactNode;
-    style?: {};
+	style?: {};
 } & React.DetailedHTMLProps<
 	React.ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement
-
 >;
 
 const Button = ({
@@ -25,16 +24,16 @@ const Button = ({
 	onClick,
 	children,
 	stretched = false,
-    style = {
-        width: stretched ? "100%" : "auto",
-    },
+	style = {
+		width: stretched ? "100%" : "auto",
+	},
 	...rest
 }: ButtonProps) => {
 	return (
 		<button
 			className={classNames(
 				styles.base,
-                styles[mode],
+				styles[mode],
 				outlined && styles.outlined,
 				styles[size],
 				rounded && styles.rounded,

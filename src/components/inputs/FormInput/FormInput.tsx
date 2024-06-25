@@ -8,8 +8,8 @@ type FormInputProps = {
 	type?: string;
 	placeholder?: string;
 	error?: boolean;
-    style?: {};
-    defaultValue?: string | undefined;
+	style?: {};
+	defaultValue?: string | undefined;
 };
 
 const FormInput = ({
@@ -19,8 +19,8 @@ const FormInput = ({
 	type = "text",
 	placeholder,
 	error,
-    style,
-    defaultValue
+	style,
+	defaultValue,
 }: FormInputProps) => {
 	return (
 		<div className={styles.formInput}>
@@ -34,8 +34,8 @@ const FormInput = ({
 				onChange={(e) => onChange(e.target.value)}
 				placeholder={placeholder}
 				className={classNames(styles.input, error ? styles.error : "")}
-                style={style}
-                defaultValue={defaultValue}
+				style={style}
+				defaultValue={defaultValue}
 			/>
 		</div>
 	);

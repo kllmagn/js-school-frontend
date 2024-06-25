@@ -27,16 +27,16 @@ type TaskDetail = {
 	detail: string;
 };
 
-export function useTask(taskgroupId: string | undefined):[Task[], boolean] {
+export function useTask(taskgroupId: string | undefined): [Task[], boolean] {
 	let [data, setData] = useState<Task[]>([]);
 	let [accessToken] = useRefreshWrapper();
-    const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		if (taskgroupId === undefined || !/\d+/.test(taskgroupId)) {
 			return;
 		}
 		if (accessToken === null) return;
-        setLoading(true);
+		setLoading(true);
 		new ApiClient(accessToken)
 			.get(`/tasks?group__id=${taskgroupId}`)
 			.then(async (response) => {
@@ -49,9 +49,9 @@ export function useTask(taskgroupId: string | undefined):[Task[], boolean] {
 					console.log(responseData.detail);
 				}
 			})
-            .finally(() => {
-                setLoading(false);
-            });
+			.finally(() => {
+				setLoading(false);
+			});
 	}, [accessToken, taskgroupId]);
 	return [data, loading];
 }

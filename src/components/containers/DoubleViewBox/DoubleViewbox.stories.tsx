@@ -14,6 +14,6 @@ type Story = StoryObj<typeof DoubleViewBox>;
 export const Primary: Story = {
 	args: {
 		left: <Text>Пример текста слева</Text>,
-        right: <Text>Пример текста справа</Text>
+		right: <Text>Пример текста справа</Text>,
 	},
 };

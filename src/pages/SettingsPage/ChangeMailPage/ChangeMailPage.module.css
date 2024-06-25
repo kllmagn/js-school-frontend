@@ -26,6 +26,14 @@
     align-items: center;
     justify-content: flex-start;
     font-size: 18px;
+    text-align: center;
+    padding: 2%;
+    border-radius: 16px;
+    margin-left: 5%;
+}
+
+.leftContent span{
+    padding: 2%;
 }
 
 .selected {
@@ -33,8 +41,8 @@
     width: 90%;
     background-color: #ffffff;
     color: rgb(0, 0, 0) !important;
-    padding: 2%;
     border-radius: 16px;
+    padding: 2%;
 }
 
 .rightContent {
@@ -53,11 +61,13 @@
 .mainHeader {
     font-size: 32px !important;
     font-weight:lighter;
-    background: #515151;;
+    background-color: #515151;;
     color: white !important;
+    padding-right: 3%;
     border-radius: 16px;
-    padding: 1%;
-    width: 30%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
 }
 
 .inputName, select{
@@ -75,7 +85,7 @@
     height: 100%;
     width: 100%;
     display: flex;
-    gap: 2%;
+    gap: 5%;
     flex-direction: column;
 }
 
@@ -102,8 +112,9 @@
 }
 
 
-.layoutLeft a:hover{
-    color: #5265f6; 
+.leftContent span:hover {
+    color:#5AD77D;
+    cursor: pointer;
 }
 
 .form {

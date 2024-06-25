@@ -15,11 +15,11 @@ import { AnimationPage } from "components/AnimationPage/AnimationPage";
 import { createPortal } from "react-dom";
 
 type DropMenu = {
-    avatar: string | undefined;
-}
+	avatar: string | undefined;
+};
 
-export function DropMenu({avatar = avatarDefault}:DropMenu ) {
-    const container = document.getElementById('root');
+export function DropMenu({ avatar }: DropMenu) {
+	const container = document.getElementById("root");
 	const navigate = useNavigate();
 
 	const handleExitButton = () => {
@@ -29,46 +29,67 @@ export function DropMenu({avatar = avatarDefault}:DropMenu ) {
 	};
 
 	const dispatch = useDispatch();
-    const [userData, loading] = useMeData();
-    const [show, setShow] = useState<Boolean>(false);
-    const handleMouseOver = () => {
-        setShow(true);
-    };
-    const handleMouseOut = () => {
-        setShow(false);
-    };
-    const profileClickHandler = useLinkClickHandler<HTMLDivElement>("/profile");
-    const settingsClickHandler = useLinkClickHandler<HTMLDivElement>("/settings");
-    console.log("showDebug", show);
+	const [userData, loading] = useMeData();
+	const [show, setShow] = useState<Boolean>(false);
+	const handleMouseOver = () => {
+		setShow(true);
+	};
+	const handleMouseOut = () => {
+		setShow(false);
+	};
+	const profileClickHandler = useLinkClickHandler<HTMLDivElement>("/profile");
+	const settingsClickHandler = useLinkClickHandler<HTMLDivElement>(
+		`/settings/${userData?.username}`,
+	);
+	console.log("showDebug", show);
 	return (
-        <>
-        {container && (loading ? createPortal(<AnimationPage></AnimationPage>, container) : <div className={styles.dropdown} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-<button  className={styles.dropbtn}>
-    <img alt="avatar" className={styles.avatar} src={avatar}></img>
-    <span> {userData ? userData.username : "Лунтик"} </span>
-    <img alt="arrow" className={styles.arrowClicked} src={icoArrow} />
-</button>
-{
-    show &&
-    <div className={styles.dropdownContentWrapper}>
-        <div className={styles.dropdownContent}>
-            <div className={styles.dropdownContentElement} onClick={profileClickHandler}>
-                <IcoProfile />
-                <span>Профиль</span>
-            </div>
-            <div className={styles.dropdownContentElement} onClick={settingsClickHandler}>
-                <IcoSettings />
-                <span>Настройки</span>
-            </div>
-            <div className={styles.dropdownContentElement} onClick={handleExitButton}>
-                <IcoExit />
-                <span>Выйти</span>
-            </div>
-        </div>
-    </div>
-}
-</div>)}</>
+		<>
+			{container &&
+				(loading ? (
+					createPortal(<AnimationPage></AnimationPage>, container)
+				) : (
+					<div
+						className={styles.dropdown}
+						onMouseOver={handleMouseOver}
+						onMouseOut={handleMouseOut}
+					>
+						<button className={styles.dropbtn}>
+							<div
+								className={styles.avatar}
+								style={{ backgroundImage: `url(${avatar})` }}
+							></div>
+							<span> {userData ? userData.username : "Лунтик"} </span>
+							<img alt="arrow" className={styles.arrowClicked} src={icoArrow} />
+						</button>
+						{show && (
+							<div className={styles.dropdownContentWrapper}>
+								<div className={styles.dropdownContent}>
+									<div
+										className={styles.dropdownContentElement}
+										onClick={profileClickHandler}
+									>
+										<IcoProfile />
+										<span>Профиль</span>
+									</div>
+									<div
+										className={styles.dropdownContentElement}
+										onClick={settingsClickHandler}
+									>
+										<IcoSettings />
+										<span>Настройки</span>
+									</div>
+									<div
+										className={styles.dropdownContentElement}
+										onClick={handleExitButton}
+									>
+										<IcoExit />
+										<span>Выйти</span>
+									</div>
+								</div>
+							</div>
+						)}
+					</div>
+				))}
+		</>
 	);
 }
-
-

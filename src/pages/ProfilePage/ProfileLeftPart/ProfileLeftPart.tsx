@@ -1,30 +1,29 @@
-
 import AvatarUpload from "components/inputs/AvatarUpload";
 import styles from "./ProfileLeftPart.module.css";
 import { useLinkClickHandler } from "react-router-dom";
 import { useState } from "react";
 import avatar from "icons/placeholder.png";
 import { useMeData } from "hooks/useMeData";
+import avatarDefault from "icons/placeholder.png";
 
-export const ProfileLeftPart = () => {
-    const [data] = useMeData();
+type ProfileLeftPart = {
+	avatar: string | undefined;
+	username: string | undefined;
+};
 
-    
-    
-    
-    return (
-        <>
-        <div className={styles.avatarContainer}>
-            <AvatarUpload backgroundSrc={data?.avatar} />
-        </div>
+export const ProfileLeftPart = ({ avatar, username }: ProfileLeftPart) => {
+	return (
+		<>
+			<div className={styles.avatarContainer}>
+				<AvatarUpload backgroundSrc={avatar} />
+			</div>
 
-        <span
-            className={styles.settings}
-            onClick={useLinkClickHandler("/settings")}
-        >
-            Настройки
-        </span>
-    </>
-
-);
+			<span
+				className={styles.settings}
+				onClick={useLinkClickHandler(`/settings/${username}`)}
+			>
+				Настройки
+			</span>
+		</>
+	);
 };

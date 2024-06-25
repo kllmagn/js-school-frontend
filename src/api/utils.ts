@@ -1,5 +1,23 @@
-const BACKEND_HOST = process.env.BACKEND_HOST || null;
+const BACKEND_HOST = process.env.REACT_APP_backend_host || null;
+console.log("BACKEND", BACKEND_HOST);
 
 export const formatPath = (path: string) => {
-    return `${BACKEND_HOST ? "http://" : ""}${BACKEND_HOST || ""}${path}`
+	return `${BACKEND_HOST ? "http://" : ""}${BACKEND_HOST || ""}${path}`;
+};
+
+function createQueryString(params: { [key: string]: string }) {
+	return Object.keys(params)
+		.map(
+			(key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+		)
+		.join("&");
+}
+
+export async function fetchWithQueryParams(
+	url: string,
+	queryParams: { [key: string]: string },
+	options: RequestInit,
+) {
+	const queryString = createQueryString(queryParams);
+	return fetch(`${url}?${queryString}`, options);
 }

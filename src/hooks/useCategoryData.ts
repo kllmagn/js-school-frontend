@@ -23,9 +23,9 @@ type CategoryDetail = {
 export function useCategoryData(categoryId: number) {
 	let [data, setData] = useState<Category | null>(null);
 	let [accessToken] = useRefreshWrapper();
-    const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(true);
 	useEffect(() => {
-        setLoading(true);
+		setLoading(true);
 		fetch(formatPath(`/api/v1/categories/${categoryId}`), {
 			method: "GET",
 			headers: {
@@ -33,19 +33,20 @@ export function useCategoryData(categoryId: number) {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${accessToken}`,
 			},
-		}).then(async (response) => {
-			const text = await response.text();
-			if (response.status === 200) {
-				let responseData: Category = JSON.parse(text);
-				setData(responseData);
-			} else {
-				let responseData: CategoryDetail = JSON.parse(text);
-				console.log(responseData.detail);
-			}
 		})
-        .finally(() => {
-            setLoading(false);
-        });
+			.then(async (response) => {
+				const text = await response.text();
+				if (response.status === 200) {
+					let responseData: Category = JSON.parse(text);
+					setData(responseData);
+				} else {
+					let responseData: CategoryDetail = JSON.parse(text);
+					console.log(responseData.detail);
+				}
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	}, [accessToken, categoryId]);
 	return [data, loading];
 }
@@ -53,10 +54,10 @@ export function useCategoryData(categoryId: number) {
 export function useCategoriesData(levelId: number): [Category[], boolean] {
 	let [data, setData] = useState<Category[]>([]);
 	let [accessToken] = useRefreshWrapper();
-    const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 	useEffect(() => {
 		if (accessToken === null) return;
-        setLoading(true);
+		setLoading(true);
 		new ApiClient(accessToken)
 			.get(`/categories?level__id=${levelId}`)
 			.then(async (response) => {
@@ -69,10 +70,9 @@ export function useCategoriesData(levelId: number): [Category[], boolean] {
 					console.log(responseData.detail);
 				}
 			})
-            .finally(() => {
-                setLoading(false);
-            });
-            ;
+			.finally(() => {
+				setLoading(false);
+			});
 	}, [accessToken, levelId]);
 	return [data, loading];
 }

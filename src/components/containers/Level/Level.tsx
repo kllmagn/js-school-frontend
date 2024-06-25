@@ -14,14 +14,22 @@ type LevelProps = {
 const Level = ({ id, title, description, order }: LevelProps) => {
 	return (
 		<ViewBox>
-            <div className={styles.levelContainer}>
-                <Label secondaryText={<Text font="gilroyLight" size="small">{title}</Text>}>
-                    <Text font="gilroyBold" size="small">Уровень {order}</Text> 
-                </Label>
-                <span className={styles.levelDescription}>{description}</span>
-                <CardList levelId={id} />
-            </div>
-        </ViewBox>
+			<div className={styles.levelContainer}>
+				<Label
+					secondaryText={
+						<Text font="gilroyLight" size="small">
+							{title}
+						</Text>
+					}
+				>
+					<Text font="gilroyBold" size="small">
+						Уровень {order}
+					</Text>
+				</Label>
+				<span className={styles.levelDescription}>{description}</span>
+				<CardList levelId={id} />
+			</div>
+		</ViewBox>
 	);
 };
 

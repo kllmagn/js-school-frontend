@@ -11,18 +11,20 @@ type CardListProps = {
 export function CardList({ levelId }: CardListProps) {
 	const [data, loading] = useCategoriesData(levelId);
 	return (
-        
 		<div className={styles.container}>
-            {loading ? <AnimationPage/> : (data.map((category, index) => (
-				<CategoryCard
-					key={category.id}
-					id={category.id}
-					title={category.title}
-					description={category.description}
-					number={index}
-				/>
-			)))}
-			
+			{loading ? (
+				<AnimationPage />
+			) : (
+				data.map((category, index) => (
+					<CategoryCard
+						key={category.id}
+						id={category.id}
+						title={category.title}
+						description={category.description}
+						number={index}
+					/>
+				))
+			)}
 		</div>
 	);
 }

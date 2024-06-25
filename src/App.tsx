@@ -22,20 +22,22 @@ function App() {
 				<Routes>
 					<Route path="/" element={<MainLayout />}>
 						<Route index element={<HomePage />} />
-                        <Route path="profile" element={<ProfilePage />} />
+						<Route path="profile" element={<ProfilePage />} />
 						<Route element={<ViewBoxLayout />}>
 							<Route path="leaderboard" element={<Leaderboard />} />
 							<Route path="search" element={<SearchPage />} />
 							<Route path="category/:cardId" element={<TaskList />} />
-                        
 						</Route>
-                        <Route
-                            path="category/:cardId/group/:taskgroupId"
-                            element={<Task />}
-                        />
-						<Route path="settings" element={<SettingsPage />} />
-                        <Route path="changePassword" element={<ChangePasswordPage />} />
-                        <Route path="changeMail" element={<ChangeMailPage />} />
+						<Route
+							path="category/:cardId/group/:taskgroupId"
+							element={<Task />}
+						/>
+						<Route path="settings/:username" element={<SettingsPage />} />
+						<Route
+							path="changePassword/:username"
+							element={<ChangePasswordPage />}
+						/>
+						<Route path="changeMail/:username" element={<ChangeMailPage />} />
 						<Route path="aboutUs" element={<DescriptionPage />} />
 					</Route>
 				</Routes>

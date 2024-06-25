@@ -1,4 +1,4 @@
-import { useLinkClickHandler } from "react-router-dom";
+import { useLinkClickHandler, useParams } from "react-router-dom";
 import styles from "./ChangePasswordPage.module.css";
 import { useState, FormEvent, ChangeEvent } from "react";
 import {
@@ -19,26 +19,24 @@ export function ChangePasswordPage() {
 	const tokenAccess = useSelector(accessTokenSelector);
 	const tokenRefresh = useSelector(refreshTokenSelector);
 	const dispatch = useDispatch();
-    const [warning, setWarning] = useState("");
+	const [warning, setWarning] = useState("");
+	const [success, setSuccess] = useState("");
+	const { username } = useParams();
 
-    async function changePassword () {
-      
-        const response = await fetch(
-			formatPath("/api/v1/users/me/password/"),
-			{
-				method: "POST", // or 'PUT'
-				headers: {
-					accept: "application/json",
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${tokenAccess}`,
-				},
-				body: JSON.stringify({
-					old_password: passwordValue,
-					new_password: newPasswordValue,
-					confirm_password: passwordConfirmation,
-				}),
+	async function changePassword() {
+		const response = await fetch(formatPath("/api/v1/users/me/password/"), {
+			method: "POST", // or 'PUT'
+			headers: {
+				accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${tokenAccess}`,
 			},
-		);
+			body: JSON.stringify({
+				old_password: passwordValue,
+				new_password: newPasswordValue,
+				confirm_password: passwordConfirmation,
+			}),
+		});
 		if (response.status === 401 && tokenAccess !== null) {
 			const responseRefresh = await fetch(
 				formatPath("/api/v1/auth/token/refresh/"),
@@ -57,84 +55,94 @@ export function ChangePasswordPage() {
 			let data: string = JSON.parse(await responseRefresh.text());
 			dispatch(setTokenAccess(data));
 		}
-        if (response.status === 400 && tokenAccess !== null) {
-            setWarning('Ваш пароль не совпадает со старым или введен неверный формат данных: пароль должен состоять из минимум 1 буквы или цифры, одной буквы заглавной или маленькой и общей длиной минимум 8 символов')
-        }
+		if (response.status === 200 && tokenAccess !== null) {
+			setSuccess("Пароль успешно изменен");
+		}
+		if (response.status === 400 && tokenAccess !== null) {
+			setWarning(
+				"Ваш пароль не совпадает со старым или введен неверный формат данных: пароль должен состоять из минимум 1 буквы или цифры, одной буквы заглавной или маленькой и общей длиной минимум 8 символов",
+			);
+		}
+	}
 
-    };
-	 
-    
-    function handleSubmit(event: FormEvent) {
+	function handleSubmit(event: FormEvent) {
 		event.preventDefault();
-        if((passwordValue === "") || (newPasswordValue === "")|| (passwordConfirmation === "")) {
-            setWarning('Необходимо заполнить все поля');
-            console.log(warning);
-        }
-        else if (passwordConfirmation !== newPasswordValue) {
-            setWarning('Новый пароль не совпадает с повторным');
-            console.log(warning);
-        }
-        else if ((newPasswordValue === passwordValue) && (newPasswordValue !== "") ){
-            setWarning('Старый пароль совпадает с новым');
-            console.log(warning);
-        }
-        else {
-            changePassword();
-            console.log(warning);
-        }
-		
-	};
-
-   
+		if (
+			passwordValue === "" ||
+			newPasswordValue === "" ||
+			passwordConfirmation === ""
+		) {
+			setWarning("Необходимо заполнить все поля");
+			console.log(warning);
+		} else if (passwordConfirmation !== newPasswordValue) {
+			setWarning("Новый пароль не совпадает с повторным");
+			console.log(warning);
+		} else if (newPasswordValue === passwordValue && newPasswordValue !== "") {
+			setWarning("Старый пароль совпадает с новым");
+			console.log(warning);
+		} else {
+			changePassword();
+			console.log(warning);
+		}
+	}
 
 	return (
-        <DoubleViewBox 
-        left={
-            <div className={styles.leftContent}>
-				<span onClick={useLinkClickHandler("/settings")}>
-					Редактирование профиля
-				</span>
-				<span className={styles.selected}>Изменить пароль</span>
-				<span onClick={useLinkClickHandler("/changeMail")}>Изменить почту</span>
-			</div>
-        }
-		right={<div className={styles.rightContent}>
-        <span className={styles.mainHeader}>Изменить пароль</span>
-        <form onSubmit={handleSubmit} className={styles.mainContent}>
-                <FormInput
-                    label="Текущий пароль"
-                    type="password"
-                    placeholder="Введите пароль"
-                    value={passwordValue}
-                    onChange={(value) => setPasswordChange(value)}
-                    
-                />
-                 <FormInput
-                    label="Новый пароль"
-                    type="password"
-                    placeholder="Введите пароль"
-                    value={newPasswordValue}
-                    onChange={(value) => setNewPasswordValue(value)}
-                />
+		<DoubleViewBox
+			left={
+				<div className={styles.leftContent}>
+					<span onClick={useLinkClickHandler(`/settings/${username}`)}>
+						Редактирование профиля
+					</span>
+					<span className={styles.selected}>Изменить пароль</span>
+					<span onClick={useLinkClickHandler(`/changeMail/${username}`)}>
+						Изменить почту
+					</span>
+				</div>
+			}
+			right={
+				<div className={styles.rightContent}>
+					<span className={styles.mainHeader}>Изменить пароль</span>
+					<form onSubmit={handleSubmit} className={styles.mainContent}>
+						<FormInput
+							label="Текущий пароль"
+							type="password"
+							placeholder="Введите пароль"
+							value={passwordValue}
+							onChange={(value) => setPasswordChange(value)}
+						/>
+						<FormInput
+							label="Новый пароль"
+							type="password"
+							placeholder="Введите пароль"
+							value={newPasswordValue}
+							onChange={(value) => setNewPasswordValue(value)}
+						/>
 
-                <FormInput
-                    label="Повторите пароль"
-                    type="password"
-                    placeholder="Введите пароль"
-                    value={passwordConfirmation}
-                    onChange={(value) => setPasswordConfirmation(value)}
-                />
-                {!(warning === '') && <a className={styles.warning}>{warning}</a>}
+						<FormInput
+							label="Повторите пароль"
+							type="password"
+							placeholder="Введите пароль"
+							value={passwordConfirmation}
+							onChange={(value) => setPasswordConfirmation(value)}
+						/>
+						{!(warning === "") && <a className={styles.warning}>{warning}</a>}
+						{!(success === "") && <a className={styles.success}>{success}</a>}
 
-
-                <Button outlined rounded style={{width: '20%', fontSize:'16px', height:'40px'}}>
-							Сохранить изменения 
-                </Button>
-                
-        </form>
-    </div>}
-			
-			
-        />
+						<Button
+							outlined
+							rounded
+							style={{
+								width: "20%",
+								fontSize: "16px",
+								height: "40px",
+								minWidth: "200px",
+							}}
+						>
+							Сохранить изменения
+						</Button>
+					</form>
+				</div>
+			}
+		/>
 	);
 }
