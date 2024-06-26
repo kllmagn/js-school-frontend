@@ -1,3 +1,4 @@
+import Markdown from "react-markdown";
 import styles from "./TheorySidebarModal.module.css";
 
 type Props = {
@@ -33,7 +34,7 @@ export function TheorySidebarModal({
 				<div className={styles.textContainer}>
 					<span className={styles.title}>{title ? title : ""}</span>
 					<span className={styles.mainText}>
-						{description ? description : ""}
+						<Markdown>{description ? description : ""}</Markdown>
 					</span>
 				</div>
 			</div>

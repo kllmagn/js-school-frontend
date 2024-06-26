@@ -15,7 +15,11 @@ const SolutionCheckContainer = ({
 	return (
 		<div className={styles.container}>
 			<div className={styles.listButtons}>
-				<button className={styles.showAnswer} onClick={onShowAnswer}>
+				<button
+					className={styles.showAnswer}
+					disabled={!canSubmitSolution}
+					onClick={onShowAnswer}
+				>
 					Показать ответ
 				</button>
 				<button

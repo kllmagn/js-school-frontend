@@ -20,7 +20,7 @@ export function splitCodeIntoAreas(
 			}
 			codeAreas.push({
 				areaId: areaMapping[i],
-				code: currentArea.join("\n"),
+				code: lines[i],
 			});
 		} else {
 			// This line doesn't have an areaId, so add it to the current area
