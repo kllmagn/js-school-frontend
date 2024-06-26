@@ -32,7 +32,7 @@ export function useTaskGroupsData(categoryId: string | undefined) {
 		}
 		if (accessToken === null) return;
 		new ApiClient(accessToken)
-			.get(`/taskgroups?category__id=${categoryId}`)
+			.get(`/taskgroups?category__id=${categoryId}&ordering=order`)
 			.then(async (response) => {
 				const text = await response.text();
 				if (response.status === 200) {

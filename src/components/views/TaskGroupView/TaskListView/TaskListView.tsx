@@ -1,7 +1,7 @@
-import styles from "./subtasklist.module.css";
+import styles from "./TaskListView.module.css";
 import { useTask } from "hooks/useTask";
-import SubTask from "./SubTask/SubTask";
-import { SolutionStatus } from "../Task";
+import TaskView from "./TaskView/TaskView";
+import { SolutionStatus } from "./TaskView/types";
 
 type SubTaskListProps = {
 	activeSubTaskStatus: SolutionStatus | null;
@@ -21,15 +21,15 @@ function SubTaskList({
 		<div className={styles.container}>
 			<div className={styles.description}>
 				<span>Задания:</span>
+			</div>
+			<div className={styles.taskList}>
 				{stepsList.map((step, index) => {
-					let subTaskStatus: string | null = null;
-					if (index < activeSubTaskIdx) {
-						subTaskStatus = "accepted";
-					} else if (index === activeSubTaskIdx) {
+					let subTaskStatus: SolutionStatus | null = null;
+					if (index === activeSubTaskIdx) {
 						subTaskStatus = activeSubTaskStatus;
 					}
 					return (
-						<SubTask
+						<TaskView
 							id={step.id}
 							description={step.description}
 							is_solved={step.is_solved}

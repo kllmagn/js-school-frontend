@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./CardList.module.css";
 import { CategoryCard } from "components/containers/Card/Card";
 import { useCategoriesData } from "hooks/useCategoryData";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 
 type CardListProps = {
 	levelId: number;
@@ -13,7 +13,7 @@ export function CardList({ levelId }: CardListProps) {
 	return (
 		<div className={styles.container}>
 			{loading ? (
-				<AnimationPage />
+				<AnimationSkeleton />
 			) : (
 				data.map((category, index) => (
 					<CategoryCard

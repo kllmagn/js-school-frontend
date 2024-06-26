@@ -1,64 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./Task.module.less";
-import { TheorySidebar } from "components/modals/TheorySidebar/TheorySidebar";
-import { NextTaskButton } from "./NextTaskButton/NextTaskButton";
+import styles from "./TaskGroupView.module.less";
 import { useLocation } from "react-router-dom";
 import { useTask } from "hooks/useTask";
 import { TaskGroup } from "hooks/useTaskgroups";
-import TaskEditor, { CodeArea } from "./TaskEditor/TaskEditor";
+import CodeEditor from "./CodeEditor/CodeEditor";
 import SolutionCheckContainer from "./SolutionCheckContainer/SolutionCheckContainer";
-import Sidebar from "./TaskSidebar/Sidebar";
-import SubTaskList from "./SubTaskList/SubTaskList";
+import SubTaskList from "./TaskListView/TaskListView";
 import ApiClient from "api/client";
 import { refreshWrapper, useRefreshWrapper } from "hooks/useRefreshWrapper";
-import GameWindow from "./TaskGameWindow/GameWindow";
+import GameWindow from "./GameView";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshTokenSelector } from "store/token/token.selector";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
-
-export enum SolutionStatus {
-	CREATED = "created",
-	IN_PROGRESS = "in_progress",
-	ERROR = "error",
-	ACCEPTED = "accepted",
-	REJECTED = "rejected",
-	TIMEOUT = "timeout",
-}
-
-function splitCodeIntoAreas(
-	code: string,
-	areaMapping: { [lineIndex: string]: number },
-): CodeArea[] {
-	const lines = code.split("\n");
-	const codeAreas: CodeArea[] = [];
-	let currentArea: string[] = [];
-	for (let i = 0; i < lines.length; i++) {
-		if (areaMapping[i]) {
-			if (currentArea.length > 0) {
-				codeAreas.push({
-					areaId: null,
-					code: currentArea.join("\n"),
-				});
-				currentArea = [];
-			}
-			codeAreas.push({
-				areaId: areaMapping[i],
-				code: "// ваш код здесь",
-			});
-		} else {
-			// This line doesn't have an areaId, so add it to the current area
-			currentArea.push(lines[i]);
-		}
-	}
-	// Add the last area
-	if (currentArea.length > 0) {
-		codeAreas.push({
-			areaId: null,
-			code: currentArea.join("\n"),
-		});
-	}
-	return codeAreas;
-}
+import { splitCodeIntoAreas } from "./CodeEditor/utils";
+import { CodeArea } from "./CodeEditor/types";
+import { SolutionStatus } from "./TaskListView/TaskView/types";
+import TheorySidebar from "components/modals/TheorySidebar/TheorySidebar";
 
 function useInterval(callback: () => void, delay: number) {
 	const savedCallback = useRef<() => void>();
@@ -80,11 +36,11 @@ function useInterval(callback: () => void, delay: number) {
 	}, [delay]);
 }
 
-export function Task() {
-	const [accessToken] = useRefreshWrapper();
+export function TaskGroupView() {
+	const [accessToken] = useRefreshWrapper(); // токен доступа
 	const refreshToken = useSelector(refreshTokenSelector);
-	const { state } = useLocation();
-	const { taskGroup } = state;
+	const { state } = useLocation(); // состояние роутера
+	const { taskGroup } = state; // информация о задаче
 	const { id, title, description } = taskGroup as TaskGroup;
 	const taskGroupId = String(id);
 	const [stepsList, loading] = useTask(taskGroupId); // повторяется в steps вызов
@@ -92,7 +48,6 @@ export function Task() {
 	const activeSubTask = stepsList[activeSubTaskIdx] || null;
 	const [activeSubTaskStatus, setActiveSubTaskStatus] =
 		useState<SolutionStatus | null>(null);
-	const [isTheoryOpen, setTheoryOpen] = useState(false);
 	const code = stepsList[activeSubTaskIdx]?.template?.content ?? null;
 	const [codeAreas, setCodeAreas] = useState<CodeArea[]>([]);
 	const [codeValue, setCodeValue] = useState(code || "");
@@ -101,20 +56,22 @@ export function Task() {
 
 	const dispatch = useDispatch();
 
-	let handleClickTheory = useCallback(() => {
-		setTheoryOpen(!isTheoryOpen);
-	}, [isTheoryOpen]);
-
 	const handleShowAnswer = useCallback(() => {
 		if (accessToken === null) return;
-		new ApiClient(accessToken).get("").then((response) => {});
-	}, [accessToken]);
+		new ApiClient(accessToken)
+			.get(`/tasks/${activeSubTask.id}/answer`)
+			.then((response) => {
+				if (response.status !== 200) return;
+				response.json().then((data) => {
+					setCodeValue(data.answer);
+				});
+			});
+	}, [accessToken, activeSubTask]);
 
 	const handleSubmitSolution = useCallback(() => {
 		setLoadingGame(true);
 		if (accessToken === null || codeAreas.length === 0) return;
 
-		// create solutionData object from codeAreas, key - areaId, value - code
 		let solutionData: { [areaId: string]: string } = {};
 		for (const area of codeAreas) {
 			if (area.areaId) {
@@ -178,20 +135,12 @@ export function Task() {
 
 	return (
 		<div className={styles.taskContainer}>
-			{isTheoryOpen && (
-				<TheorySidebar
-					handleClickTheory={handleClickTheory}
-					description={description}
-					title={title}
-				/>
-			)}
-
 			<div className={styles.taskContainerInner}>
 				<div className={styles.taskLayout}>
-					<Sidebar handleClickTheory={handleClickTheory} />
+					<TheorySidebar title={title} description={description} />
 					<div className={styles.leftPart}>
 						{codeValue !== null && (
-							<TaskEditor
+							<CodeEditor
 								data={codeAreas}
 								setAreaData={(idx, code) => {
 									setCodeAreas((prev) => {
@@ -226,7 +175,6 @@ export function Task() {
 							activeSubTaskStatus={activeSubTaskStatus}
 							setActiveSubTaskIdx={setActiveSubTaskIdx}
 						/>
-						<NextTaskButton />
 					</div>
 				</div>
 			</div>

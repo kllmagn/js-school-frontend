@@ -11,7 +11,7 @@ import { setTokenAccess, setTokenRefresh } from "store/token/token.slice";
 import avatarDefault from "icons/placeholder.png";
 import icoArrow from "icons/arrow.svg";
 import { useMeData } from "hooks/useMeData";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 import { createPortal } from "react-dom";
 
 type DropMenu = {
@@ -46,7 +46,7 @@ export function DropMenu({ avatar }: DropMenu) {
 		<>
 			{container &&
 				(loading ? (
-					createPortal(<AnimationPage></AnimationPage>, container)
+					createPortal(<AnimationSkeleton></AnimationSkeleton>, container)
 				) : (
 					<div
 						className={styles.dropdown}

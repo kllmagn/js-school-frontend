@@ -1,29 +1,12 @@
 import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs";
+import styles from "./CodeEditor.module.css";
+import { TaskEditorProps } from "./types";
+import { hightlightWithLineNumbers } from "./utils";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
-import styles from "./TaskEditor.module.css";
 
-export type CodeArea = {
-	areaId: number | null;
-	code: string;
-};
-
-export type TaskEditorProps = {
-	data: CodeArea[];
-	setAreaData: (idx: number, code: string) => void;
-};
-
-const TaskEditor = ({ data, setAreaData }: TaskEditorProps) => {
-	const hightlightWithLineNumbers = (offset: number, input: string) => {
-		return highlight(input, languages.js, "js")
-			.split("\n")
-			.map((line, idx) => {
-				return `<span class='${styles.editorLineNumber}'>${idx + 1 + offset}</span>${line}`;
-			})
-			.join("\n");
-	};
+const CodeEditor = ({ data, setAreaData }: TaskEditorProps) => {
 	return (
 		<div className={styles.editorContainer}>
 			{data.map((area, idx) => (
@@ -59,4 +42,4 @@ const TaskEditor = ({ data, setAreaData }: TaskEditorProps) => {
 	);
 };
 
-export default TaskEditor;
+export default CodeEditor;

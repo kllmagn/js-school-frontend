@@ -8,7 +8,7 @@
 }
 
 .sidebarInner {
-    position:absolute;
+    position: absolute;
     background-color: transparent;
     height: 100%;
     width: 100%;
@@ -29,8 +29,4 @@
 .theorySvg {
     transform: rotate(180deg);
     color: black;
-}
-
-.sidebar:hover {
-   
 }

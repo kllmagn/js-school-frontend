@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./sidebar.module.css";
+import styles from "./TheorySidebarButton.module.css";
 
 interface Props {
 	handleClickTheory: () => void;
 }
 
-function Sidebar({ handleClickTheory }: Props) {
+function TheorySidebarButton({ handleClickTheory }: Props) {
 	return (
 		<>
 			<div className={styles.sidebar} onClick={handleClickTheory}>
@@ -32,4 +32,4 @@ function Sidebar({ handleClickTheory }: Props) {
 	);
 }
 
-export default Sidebar;
+export default TheorySidebarButton;

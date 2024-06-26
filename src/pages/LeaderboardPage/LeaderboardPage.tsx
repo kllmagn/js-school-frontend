@@ -3,7 +3,7 @@ import styles from "./leaderboard.module.css";
 import { LeaderboardElement } from "./LeaderboardElement/LeaderboardElement";
 import trophy from "icons/trophy.png";
 import { useLeaderboardData } from "hooks/useLeaderboardData";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 
 export const Leaderboard = () => {
 	const [data, loading] = useLeaderboardData();
@@ -13,7 +13,7 @@ export const Leaderboard = () => {
 				Топ 10 пользователей <img className={styles.trophy} src={trophy} />
 			</span>
 			{loading ? (
-				<AnimationPage />
+				<AnimationSkeleton />
 			) : (
 				data.map((category, index) => (
 					<LeaderboardElement

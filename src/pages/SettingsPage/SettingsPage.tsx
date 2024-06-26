@@ -6,7 +6,7 @@ import FormInput from "components/inputs/FormInput/FormInput";
 import { FormEvent, useEffect, useState } from "react";
 import FormSelector from "components/inputs/FormSelector/FormSelector";
 import { useMeData } from "hooks/useMeData";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 
 export function SettingsPage() {
 	const { username } = useParams();

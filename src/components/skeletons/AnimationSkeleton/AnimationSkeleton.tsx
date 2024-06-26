@@ -1,6 +1,6 @@
-import styles from "./AnimationPage.module.less";
+import styles from "./AnimationSkeleton.module.less";
 
-export function AnimationPage() {
+export function AnimationSkeleton() {
 	return (
 		<div className={styles.container}>
 			<svg className={styles.spinner} viewBox="0 0 50 50">

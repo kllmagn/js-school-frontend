@@ -6,7 +6,7 @@ import { useMeData } from "hooks/useMeData";
 import { useState } from "react";
 import AvatarUpload from "components/inputs/AvatarUpload/AvatarUpload";
 import DoubleViewBox from "components/containers/DoubleViewBox/DoubleViewBox";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 import { ProfileLeftPart } from "./ProfileLeftPart/ProfileLeftPart";
 
 export const ProfilePage = () => {
@@ -17,7 +17,7 @@ export const ProfilePage = () => {
 	return (
 		<>
 			{loading ? (
-				<AnimationPage />
+				<AnimationSkeleton />
 			) : (
 				<DoubleViewBox
 					left={

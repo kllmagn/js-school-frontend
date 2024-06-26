@@ -38,7 +38,7 @@ export function useTask(taskgroupId: string | undefined): [Task[], boolean] {
 		if (accessToken === null) return;
 		setLoading(true);
 		new ApiClient(accessToken)
-			.get(`/tasks?group__id=${taskgroupId}`)
+			.get(`/tasks?group__id=${taskgroupId}&ordering=order`)
 			.then(async (response) => {
 				const text = await response.text();
 				if (response.status === 200) {

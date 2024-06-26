@@ -1,14 +1,14 @@
 import { useCategoryLevelData } from "hooks/useCategoryLevels";
 import styles from "./HomePage.module.css";
 import Level from "components/containers/Level/Level";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 
 const HomePage = () => {
 	const [data, loading] = useCategoryLevelData();
 	return (
 		<>
 			{loading ? (
-				<AnimationPage />
+				<AnimationSkeleton />
 			) : (
 				data
 					.sort((a, b) => a.order - b.order)

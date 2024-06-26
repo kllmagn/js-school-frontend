@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SearchElement } from "./SearchElement/SearchElement";
 import { useRefreshWrapper } from "hooks/useRefreshWrapper";
 import { fetchWithQueryParams } from "api/utils";
-import { AnimationPage } from "components/AnimationPage/AnimationPage";
+import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 
 type UsersList = {
 	count: number;
@@ -78,7 +78,7 @@ export function SearchPage() {
 				onSearch={handleSearch}
 			/>
 			{loading ? (
-				<AnimationPage />
+				<AnimationSkeleton />
 			) : (
 				showResults &&
 				data.map((category, index) => (
