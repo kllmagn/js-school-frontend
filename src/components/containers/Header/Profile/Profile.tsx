@@ -27,10 +27,11 @@ const Profile = () => {
 	};
 
 	return (
+        <>
 		<div className={styles.profileContainer}>
 			{tokenAccess && <DropMenu avatar={userData?.avatar} />}
-
-			{!tokenAccess && (
+		</div>
+        {!tokenAccess && (
 				<div className={userClass}>
 					<button
 						className={styles.logButton}
@@ -88,7 +89,7 @@ const Profile = () => {
 					onRegistModal={handleClickRegistration}
 				/>
 			)}
-		</div>
+        </>
 	);
 };
 

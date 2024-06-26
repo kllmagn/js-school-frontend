@@ -21,7 +21,7 @@ function App() {
 			<Provider store={store}>
 				<Routes>
 					<Route path="/" element={<MainLayout />}>
-						<Route index element={<HomePage />} />
+						<Route  path="home" element={<HomePage />} />
 						<Route path="profile" element={<ProfilePage />} />
 						<Route element={<ViewBoxLayout />}>
 							<Route path="leaderboard" element={<Leaderboard />} />
@@ -38,7 +38,7 @@ function App() {
 							element={<ChangePasswordPage />}
 						/>
 						<Route path="changeMail/:username" element={<ChangeMailPage />} />
-						<Route path="aboutUs" element={<DescriptionPage />} />
+						<Route index element={<DescriptionPage />} />
 					</Route>
 				</Routes>
 			</Provider>

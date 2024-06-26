@@ -1,8 +1,11 @@
 import { useLinkClickHandler } from "react-router-dom";
 import styles from "./DescriptionPage.module.css";
 import png2Description from "./laptop_typing.png";
+import { useRefreshWrapper } from "hooks/useRefreshWrapper";
 
 export function DescriptionPage() {
+    const [token] = useRefreshWrapper();
+    const homeClickHandler = useLinkClickHandler<HTMLDivElement>("/home");
 	return (
 		<div className={styles.container}>
 			<div className={styles.layout}>
@@ -54,10 +57,10 @@ export function DescriptionPage() {
 							</span>
 						</div>
 					</div>
-
-					<div className={styles.button} onClick={useLinkClickHandler("/")}>
+                    {token && <div className={styles.button} onClick={homeClickHandler}>
 						Перейти к обучению
-					</div>
+					</div>}
+					
 				</div>
 			</div>
 		</div>
