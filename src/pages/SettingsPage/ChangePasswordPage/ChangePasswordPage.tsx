@@ -90,13 +90,10 @@ export function ChangePasswordPage() {
 		<DoubleViewBox
 			left={
 				<div className={styles.leftContent}>
-					<span onClick={useLinkClickHandler(`/settings/${username}`)}>
+					<span onClick={useLinkClickHandler(`/${username}/settings`)}>
 						Редактирование профиля
 					</span>
 					<span className={styles.selected}>Изменить пароль</span>
-					<span onClick={useLinkClickHandler(`/changeMail/${username}`)}>
-						Изменить почту
-					</span>
 				</div>
 			}
 			right={

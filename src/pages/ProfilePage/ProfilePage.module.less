@@ -43,46 +43,41 @@
     font-size: 32px;
 }
 
-.ratingHeader {
+.rankInfo {
     font-weight: lighter;
     font-size: 18px;
     margin-bottom: 5%;
 }
 
-.readyTasksHeader {
-    width: 100%;
-    height: 10%;
-    margin-top: 10%;
-    font-weight:lighter;
+.solvedTasksHeader {
+    font-weight: lighter;
     background: #515151;
     color: white !important;
     border-radius: 16px;
-    padding: 1%;
+    padding: 10px;
+    width: fit-content;
     font-size: 24px;
-    margin-left: 2%;
 }
 
-.readyTasks {
-    margin-top: 3% ;
+.solvedTaskList {
     display: flex;
     flex-direction: column;
-    margin-left: 2%;
+    overflow: scroll;
+    padding: 2%;
 }
 
-.readyTasks span {
+.solvedTaskList span {
     width: fit-content;
-    background-size:contain;
+    background-color: @background-color-secondary;
     font-size: 18px;
     margin-bottom: 2%;
     padding: 2%;
     border-radius: 16px;
     padding-right: 5%;
-
 }
 
-.readyTasks span:hover{
+.solvedTaskList span:hover{
     background-color: #5AD77D!important;
-    
     cursor: pointer;
     transition: 0.1s linear;
 }
@@ -108,12 +103,16 @@
    cursor: pointer;
 }
 
-.readyTasksContainer {
+.solvedTasksContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     background-color: rgb(255, 255, 255);
     width: 90%;
     height: 70%;
     margin-bottom: 3%;
     border-radius: 16px;
     margin-right: 10%;
-    padding-top: 3%;
+    padding: 15px;
+    box-sizing: content-box;
 }

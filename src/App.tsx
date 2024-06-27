@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { Route, Routes } from "react-router-dom";
 import { DescriptionPage } from "pages/DescriptionPage/DescriptionPage";
-import { ChangeMailPage } from "pages/SettingsPage/ChangeMailPage/ChangeMailPage";
 import { SettingsPage } from "pages/SettingsPage/SettingsPage";
 import { ChangePasswordPage } from "pages/SettingsPage/ChangePasswordPage/ChangePasswordPage";
 import { ProfilePage } from "pages/ProfilePage/ProfilePage";
@@ -21,7 +20,8 @@ function App() {
 			<Provider store={store}>
 				<Routes>
 					<Route path="/" element={<MainLayout />}>
-						<Route  path="home" element={<HomePage />} />
+                        <Route index element={<DescriptionPage />} />
+						<Route path="learning" element={<HomePage />} />
 						<Route path="profile" element={<ProfilePage />} />
 						<Route element={<ViewBoxLayout />}>
 							<Route path="leaderboard" element={<Leaderboard />} />
@@ -32,13 +32,11 @@ function App() {
 							path="category/:cardId/group/:taskgroupId"
 							element={<TaskGroupView />}
 						/>
-						<Route path="settings/:username" element={<SettingsPage />} />
+						<Route path=":username/settings" element={<SettingsPage />} />
 						<Route
-							path="changePassword/:username"
+							path=":username/settings/password"
 							element={<ChangePasswordPage />}
 						/>
-						<Route path="changeMail/:username" element={<ChangeMailPage />} />
-						<Route index element={<DescriptionPage />} />
 					</Route>
 				</Routes>
 			</Provider>

@@ -4,6 +4,7 @@ import Modal from "components/containers/Modal/Modal";
 import Button from "components/base/Button";
 import FormInput from "components/inputs/FormInput/FormInput";
 import { formatPath } from "api/utils";
+import { toast } from 'react-toastify';
 
 type RegisterModalProps = {
 	onChange: () => void;
@@ -32,8 +33,14 @@ const RegisterModal = ({ onChange, onAuthModal }: RegisterModalProps) => {
 		});
 		if (response.status === 201) {
 			onChange();
+            toast("Вы успешно зарегистрировались!", {
+                type: "success",
+            });
 		} else {
 			setWarning(true);
+            toast("Ошибка при регистрации", {
+                type: "error",
+            });
 		}
 	}
 

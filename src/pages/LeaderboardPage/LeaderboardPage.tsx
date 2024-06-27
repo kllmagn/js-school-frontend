@@ -15,16 +15,16 @@ export const Leaderboard = () => {
 			{loading ? (
 				<AnimationSkeleton />
 			) : (
-				data.map((category, index) => (
+				data.map((users, index) => (
 					<LeaderboardElement
-						key={category.id}
-						id={category.id}
-						username={category.username}
-						solutions={category.solutions}
-						solutions_total={category.solutions_total}
-						avatar={category.avatar}
-						rank={category.rank}
-						rank_position={category.rank_position}
+						key={users.id}
+						id={users.id}
+						username={users.username}
+						solutions={users.solutions}
+						solutions_total={users.solutions_total}
+						avatar={users.avatar}
+						rank={users.rank}
+						rank_position={users.rank_position}
 					/>
 				))
 			)}

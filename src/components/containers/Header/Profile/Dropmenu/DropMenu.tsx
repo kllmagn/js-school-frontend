@@ -39,7 +39,7 @@ export function DropMenu({ avatar }: DropMenu) {
 	};
 	const profileClickHandler = useLinkClickHandler<HTMLDivElement>("/profile");
 	const settingsClickHandler = useLinkClickHandler<HTMLDivElement>(
-		`/settings/${userData?.username}`,
+		`/${userData?.username}/settings`,
 	);
 	console.log("showDebug", show);
 	return (

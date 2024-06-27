@@ -1,9 +1,7 @@
 const {
 	override,
-	fixBabelImports,
 	adjustStyleLoaders,
 	addLessLoader,
-	addWebpackModuleRule,
 } = require("customize-cra");
 const path = require("path");
 

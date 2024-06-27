@@ -20,7 +20,7 @@ export const ProfileLeftPart = ({ avatar, username }: ProfileLeftPart) => {
 
 			<span
 				className={styles.settings}
-				onClick={useLinkClickHandler(`/settings/${username}`)}
+				onClick={useLinkClickHandler(`/${username}/settings`)}
 			>
 				Настройки
 			</span>

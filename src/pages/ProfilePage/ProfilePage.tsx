@@ -1,19 +1,13 @@
-import styles from "./ProfilePage.module.css";
-import avatar from "icons/placeholder.png";
-import avatarAlt from "icons/avatarChange.png";
-import { useLinkClickHandler } from "react-router-dom";
+import styles from "./ProfilePage.module.less";
 import { useMeData } from "hooks/useMeData";
-import { useState } from "react";
-import AvatarUpload from "components/inputs/AvatarUpload/AvatarUpload";
 import DoubleViewBox from "components/containers/DoubleViewBox/DoubleViewBox";
 import { AnimationSkeleton } from "components/skeletons/AnimationSkeleton/AnimationSkeleton";
 import { ProfileLeftPart } from "./ProfileLeftPart/ProfileLeftPart";
+import { useTask } from "hooks/useTask";
 
 export const ProfilePage = () => {
 	const [userData, loading] = useMeData();
-
-	const [imageSrc, setImageSrc] = useState(avatar);
-
+    const [tasks] = useTask(undefined, true);
 	return (
 		<>
 			{loading ? (
@@ -31,16 +25,19 @@ export const ProfilePage = () => {
 							<span className={styles.username}>
 								{userData ? userData.username : ""}
 							</span>
-							<span className={styles.ratingHeader}>Рейтинг: #123234</span>
-							<div className={styles.readyTasksContainer}>
-								<span className={styles.readyTasksHeader}>
-									{" "}
-									Решенные задачи{" "}
+							<span className={styles.rankInfo}>
+                                {`Рейтинг: #${userData?.rank_position} (${userData?.rank} очков)`}
+                            </span>
+							<div className={styles.solvedTasksContainer}>
+								<span className={styles.solvedTasksHeader}>
+									Решенные задачи
 								</span>
-
-								<div className={styles.readyTasks}>
-									<span>Задание 1 - делаем игру 2024</span>
-									<span>Задание 2 - делаем игру 2024</span>
+								<div className={styles.solvedTaskList}>
+									{
+                                        tasks.map((task) => (
+                                            <span>{task.id} - {task.description}</span>
+                                        ))
+                                    }
 								</div>
 							</div>
 						</>

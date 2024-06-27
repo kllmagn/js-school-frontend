@@ -1,13 +1,9 @@
 @font-face { font-family: gilroy-light; src: url('fonts/Gilroy-Light.otf'); } 
 
 .app {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
     font-family: "gilroy-light", system-ui;
-    
 }
 
 ::-webkit-scrollbar {

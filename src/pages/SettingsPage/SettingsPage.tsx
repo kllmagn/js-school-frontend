@@ -14,10 +14,7 @@ export function SettingsPage() {
 	const [warning, setWarning] = useState("");
 
 	const passwordClickHandler = useLinkClickHandler<HTMLDivElement>(
-		`/changePassword/${username}`,
-	);
-	const mailClickHandler = useLinkClickHandler<HTMLDivElement>(
-		`/changeMail/${username}`,
+		`/${username}/settings/password`,
 	);
 
 	function handleSubmit(event: FormEvent) {
@@ -32,7 +29,6 @@ export function SettingsPage() {
 				<div className={styles.leftContent}>
 					<span className={styles.selected}>Редактирование профиля</span>
 					<span onClick={passwordClickHandler}>Изменить пароль</span>
-					<span onClick={mailClickHandler}>Изменить почту</span>
 				</div>
 			}
 			right={
