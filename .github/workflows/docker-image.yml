@@ -18,5 +18,5 @@ jobs:
     - name: Build the Docker image
       run: |
         docker login js-school.cr.cloud.ru -u aba0ef2e8a312ad99f3912a77da80c9a -p 81c2bff6246eb8e482d142c32c940d90
-        docker build . --tag js-school.cr.cloud.ru/js-school-backend . --platform linux/amd64
+        docker build --tag js-school.cr.cloud.ru/js-school-backend . --platform linux/amd64
         docker push js-school.cr.cloud.ru/js-school-backend
